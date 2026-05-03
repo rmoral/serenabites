@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-label="Serena Bites">
+  <title>Serena Bites — Logo vertical apilado</title>
+  
+  <circle cx="160" cy="120" r="98" fill="#2d4717"></circle>
+  <circle cx="160" cy="120" r="86" fill="none" stroke="#efb73a" stroke-width="1.2" opacity="0.45"></circle>
+  <circle cx="160" cy="120" r="82" fill="none" stroke="#efb73a" stroke-width="0.6" opacity="0.3"></circle>
+  <g fill="#efb73a" opacity="0.55">
+    <circle cx="160" cy="34" r="1.6"></circle>
+    <circle cx="246" cy="120" r="1.6"></circle>
+    <circle cx="160" cy="206" r="1.6"></circle>
+    <circle cx="74" cy="120" r="1.6"></circle>
+  </g>
+  <text x="160" y="155" text-anchor="middle" font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="500" font-size="118" fill="#efb73a" letter-spacing="-6">sb</text>
+  <circle cx="208" cy="148" r="4.5" fill="#b0481f"></circle>
+
+  
+  <g font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-weight="500" text-anchor="middle" letter-spacing="-1">
+    <text x="160" y="290" font-size="48" fill="#1d2a14">Serena</text>
+    <text x="160" y="338" font-size="48" font-style="italic" font-weight="400" fill="#b0481f">Bites<tspan fill="#1d2a14">.</tspan></text>
+  </g>
+
+  
+  <line x1="60" y1="368" x2="100" y2="368" stroke="#4f5a3d" stroke-width="0.8"></line>
+  <line x1="220" y1="368" x2="260" y2="368" stroke="#4f5a3d" stroke-width="0.8"></line>
+  <text x="160" y="372" text-anchor="middle" font-family="&#39;JetBrains Mono&#39;, ui-monospace, monospace" font-size="9" letter-spacing="2.5" fill="#4f5a3d">EST · 2026</text>
+</svg>

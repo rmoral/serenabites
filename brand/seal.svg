@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Serena Bites Sello">
+  <title>Serena Bites — Sello giratorio</title>
+  <defs>
+    <path id="sealCircle" d="M 120 120 m -92 0 a 92 92 0 1 1 184 0 a 92 92 0 1 1 -184 0"></path>
+  </defs>
+  
+  <circle cx="120" cy="120" r="116" fill="#efb73a"></circle>
+  
+  <circle cx="120" cy="120" r="100" fill="none" stroke="#2d4717" stroke-width="0.8"></circle>
+  <circle cx="120" cy="120" r="80" fill="none" stroke="#2d4717" stroke-width="0.5" opacity="0.4"></circle>
+  
+  <text fill="#2d4717" font-family="&#39;JetBrains Mono&#39;, ui-monospace, monospace" font-size="11" font-weight="500" letter-spacing="3.5">
+    <textPath href="#sealCircle">REAL FOOD · DONE RIGHT · EST 2026 · MEDITERRANEAN SOUL · </textPath>
+  </text>
+  
+  <text x="120" y="108" text-anchor="middle" font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="400" font-size="32" fill="#2d4717">eat</text>
+  <text x="120" y="142" text-anchor="middle" font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="400" font-size="32" fill="#2d4717">real</text>
+  
+  <circle cx="120" cy="156" r="3" fill="#b0481f"></circle>
+  
+  <g fill="#2d4717">
+    <circle cx="62" cy="120" r="1.8"></circle>
+    <circle cx="178" cy="120" r="1.8"></circle>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Serena Bites">
+  <title>D · Rama de oliva orgánica</title>
+  
+  <path d="M 50 200 Q 100 160 130 100 Q 150 60 190 40" stroke="#2d4717" stroke-width="3" fill="none" stroke-linecap="round"></path>
+  
+  <g fill="#7ba64c">
+    <ellipse cx="80" cy="170" rx="14" ry="6" transform="rotate(-30 80 170)"></ellipse>
+    <ellipse cx="105" cy="138" rx="16" ry="6.5" transform="rotate(-45 105 138)"></ellipse>
+    <ellipse cx="125" cy="100" rx="14" ry="6" transform="rotate(-55 125 100)"></ellipse>
+    <ellipse cx="150" cy="70" rx="13" ry="5.5" transform="rotate(-70 150 70)"></ellipse>
+  </g>
+  <g fill="#4f7232">
+    <ellipse cx="95" cy="158" rx="12" ry="5" transform="rotate(40 95 158)"></ellipse>
+    <ellipse cx="118" cy="120" rx="14" ry="6" transform="rotate(30 118 120)"></ellipse>
+    <ellipse cx="140" cy="84" rx="12" ry="5" transform="rotate(20 140 84)"></ellipse>
+  </g>
+  
+  <ellipse cx="115" cy="152" rx="6" ry="8" fill="#1d2a14"></ellipse>
+  <ellipse cx="138" cy="115" rx="6" ry="8" fill="#1d2a14"></ellipse>
+  <ellipse cx="160" cy="80" rx="6" ry="8" fill="#5a2a3e"></ellipse>
+  
+  <ellipse cx="113" cy="149" rx="1.5" ry="2" fill="#7ba64c" opacity="0.5"></ellipse>
+  <ellipse cx="136" cy="112" rx="1.5" ry="2" fill="#7ba64c" opacity="0.5"></ellipse>
+</svg>

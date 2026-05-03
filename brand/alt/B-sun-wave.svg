@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Serena Bites">
+  <title>B · Sol y ola mediterráneo</title>
+  <rect width="200" height="200" rx="20" fill="#f4ecd8"></rect>
+  
+  <circle cx="100" cy="78" r="32" fill="#efb73a"></circle>
+  
+  <g stroke="#b0481f" stroke-width="3" stroke-linecap="round">
+    <line x1="100" y1="30" x2="100" y2="42"></line>
+    <line x1="60" y1="78" x2="48" y2="78"></line>
+    <line x1="140" y1="78" x2="152" y2="78"></line>
+    <line x1="68" y1="46" x2="60" y2="38"></line>
+    <line x1="132" y1="46" x2="140" y2="38"></line>
+  </g>
+  
+  <path d="M 20 130 Q 50 118 80 130 T 140 130 T 200 130" stroke="#2d4717" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+  <path d="M 20 150 Q 50 138 80 150 T 140 150 T 200 150" stroke="#2d4717" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.6"></path>
+  
+  <text x="100" y="184" text-anchor="middle" font-family="&#39;Fraunces&#39;, serif" font-size="14" font-style="italic" font-weight="500" fill="#1d2a14" letter-spacing="-0.5">Serena Bites</text>
+</svg>
