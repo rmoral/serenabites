@@ -1742,6 +1742,91 @@
     }
   }
 
+  /* ============ THANK-YOU / CANCEL OVERLAY ============ */
+  .thanks {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: var(--cream);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  .thanks.open { display: flex; }
+  .thanks-mark {
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    background: var(--olive-deep);
+    color: var(--lemon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+    animation: thanksPop 0.5s cubic-bezier(.2,.7,.3,1.4);
+  }
+  .thanks.cancel .thanks-mark { background: var(--terra); color: var(--cream); }
+  @keyframes thanksPop {
+    0% { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .thanks-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--olive);
+    margin-bottom: 0.8rem;
+  }
+  .thanks h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    max-width: 16ch;
+  }
+  .thanks h2 em { font-style: italic; color: var(--terra); }
+  .thanks p {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 44ch;
+    margin-bottom: 1.6rem;
+  }
+  .thanks-order {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 0.6rem 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .thanks-order strong { color: var(--olive-deep); }
+  .thanks-cta {
+    background: var(--olive-deep);
+    color: var(--cream);
+    border: none;
+    border-radius: 99px;
+    padding: 0.95rem 1.8rem;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+  }
+  .thanks-cta:hover { background: var(--olive); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
@@ -2433,12 +2518,29 @@
       <div class="row total"><span>Total</span><span id="sumTotal">0,00 €</span></div>
     </div>
     <button class="btn-checkout" id="btnCheckout" type="button">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M20 12c0 4.4-3.6 8-8 8-1.4 0-2.7-.4-3.8-1L4 20l1-4.2c-.6-1.1-1-2.4-1-3.8 0-4.4 3.6-8 8-8s8 3.6 8 8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-      <span id="btnCheckoutLabel">Enviar pedido por WhatsApp</span>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M2 7h13l1 4h4l2 4v4h-3a2 2 0 11-4 0H9a2 2 0 11-4 0H2V7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span id="btnCheckoutLabel">Pagar y confirmar pedido</span>
     </button>
-    <div class="btn-checkout-note">Confirmación en menos de 5 min</div>
+    <div class="btn-checkout-note">Pago seguro con Stripe · 3D Secure</div>
   </div>
 </aside>
+
+<!-- ============ THANK-YOU / CANCEL OVERLAY ============ -->
+<div class="thanks" id="thanks" role="dialog" aria-modal="true" aria-labelledby="thanksTitle" aria-hidden="true">
+  <div class="thanks-mark" id="thanksMark" aria-hidden="true">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><path id="thanksIconPath" d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="thanks-eyebrow" id="thanksEyebrow">Pedido confirmado</div>
+  <h2 id="thanksTitle">¡Gracias! Lo estamos <em>preparando.</em></h2>
+  <p id="thanksMessage">Recibirás la confirmación en WhatsApp en menos de 5 minutos. Si es a domicilio, te avisamos cuando salga el repartidor.</p>
+  <div class="thanks-order" id="thanksOrder" hidden>
+    Pedido <strong id="thanksOrderId">—</strong>
+  </div>
+  <a href="#" class="thanks-cta" id="thanksClose">
+    Volver al inicio
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
 
 <script>
   /* ============================================================
@@ -2529,8 +2631,12 @@
     const priceEl = card.querySelector('.dish-price');
     if (!nameEl || !priceEl) return;
 
-    const id = (numEl?.textContent || nameEl.textContent).replace(/[^A-Za-z0-9]/g, '').toLowerCase();
     const name = nameEl.textContent.trim();
+    // ID estable basado en el nombre (sin tildes, sin caracteres especiales).
+    // Debe coincidir con las claves del MENU en api/create-checkout-session.js
+    const id = name.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '');
     const price = parseFloat(priceEl.textContent.replace(/[^\d,]/g, '').replace(',', '.'));
     const img = card.querySelector('.dish-img img')?.src || '';
 
@@ -2704,15 +2810,17 @@
     });
   });
 
-  /* ---------- Checkout → WhatsApp ---------- */
-  btnCheckout.addEventListener('click', () => {
+  /* ---------- Checkout → Stripe ---------- */
+  const btnCheckoutLabel = document.getElementById('btnCheckoutLabel');
+  let checkoutInFlight = false;
+
+  btnCheckout.addEventListener('click', async () => {
+    if (checkoutInFlight) return;
+
     const entries = Object.entries(cart);
     if (entries.length === 0) return;
-    const subtotal = entries.reduce((a, [, v]) => a + v.qty * v.price, 0);
-    const isDelivery = mode === 'delivery';
-    const fee = !isDelivery ? 0 : (subtotal >= CONFIG.freeDeliveryFrom ? 0 : CONFIG.deliveryFee);
-    const total = subtotal + fee;
 
+    const isDelivery = mode === 'delivery';
     const name = (document.getElementById('nameInput').value || '').trim();
     const phone = (document.getElementById('phoneInput').value || '').trim();
     const notes = (document.getElementById('notesInput').value || '').trim();
@@ -2729,28 +2837,113 @@
       return;
     }
 
-    const lines = [
-      `*Pedido — Serena Bites*`,
-      ``,
-      `*Modo:* ${isDelivery ? 'A domicilio' : 'Recogida en barra'}`,
-      `*Nombre:* ${name}`,
-      `*Teléfono:* ${phone}`,
-      isDelivery ? `*Dirección:* ${address}, ${postcode}${city ? ' ' + city : ''}` : null,
-      ``,
-      `*Pedido:*`,
-      ...entries.map(([, v]) => `· ${v.qty}× ${v.name} — ${fmt(v.qty * v.price)}`),
-      ``,
-      `Subtotal: ${fmt(subtotal)}`,
-      isDelivery ? `Envío: ${fee === 0 ? 'Gratis' : fmt(fee)}` : null,
-      `*Total: ${fmt(total)}*`,
-      notes ? `\n*Notas:* ${notes}` : null,
-      ``,
-      `ETA estimada: ${isDelivery ? CONFIG.deliveryEta : CONFIG.pickupEta}`
-    ].filter(Boolean);
+    checkoutInFlight = true;
+    btnCheckout.disabled = true;
+    btnCheckoutLabel.textContent = 'Redirigiendo a pago seguro…';
 
-    const text = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${text}`, '_blank', 'noopener');
+    try {
+      const payload = {
+        items: entries.map(([id, v]) => ({ id, qty: v.qty })),
+        mode,
+        customer: { name, phone, address, postcode, city, notes }
+      };
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.url) {
+        throw new Error(data.error || 'No se pudo iniciar el pago. Inténtalo de nuevo.');
+      }
+      // Guardamos snapshot del pedido por si el usuario cancela y vuelve
+      try { localStorage.setItem('sb_last_customer', JSON.stringify(payload.customer)); } catch (_) {}
+      window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+      alert(err.message || 'Error al iniciar el pago.');
+      checkoutInFlight = false;
+      btnCheckout.disabled = false;
+      btnCheckoutLabel.textContent = 'Pagar y confirmar pedido';
+    }
   });
+
+  /* ---------- Pre-rellenar formulario con últimos datos del cliente ---------- */
+  try {
+    const cached = JSON.parse(localStorage.getItem('sb_last_customer') || 'null');
+    if (cached) {
+      const set = (id, v) => { const el = document.getElementById(id); if (el && v) el.value = v; };
+      set('nameInput', cached.name);
+      set('phoneInput', cached.phone);
+      set('addressInput', cached.address);
+      set('postcodeInput', cached.postcode);
+      set('cityInput', cached.city);
+    }
+  } catch (_) {}
+
+  /* ---------- Volver de Stripe: success / cancel ---------- */
+  const thanks = document.getElementById('thanks');
+  const thanksTitle = document.getElementById('thanksTitle');
+  const thanksMessage = document.getElementById('thanksMessage');
+  const thanksEyebrow = document.getElementById('thanksEyebrow');
+  const thanksOrder = document.getElementById('thanksOrder');
+  const thanksOrderId = document.getElementById('thanksOrderId');
+  const thanksMark = document.getElementById('thanksMark');
+  const thanksIconPath = document.getElementById('thanksIconPath');
+  const thanksClose = document.getElementById('thanksClose');
+
+  function showThanks({ kind, sessionId }) {
+    if (kind === 'success') {
+      thanks.classList.remove('cancel');
+      thanksEyebrow.textContent = 'Pedido confirmado';
+      thanksTitle.innerHTML = '¡Gracias! Lo estamos <em>preparando.</em>';
+      thanksMessage.textContent = 'Recibirás la confirmación en WhatsApp en menos de 5 minutos. Si es a domicilio, te avisamos cuando salga el repartidor.';
+      thanksIconPath.setAttribute('d', 'M5 12l5 5L20 7');
+      if (sessionId) {
+        thanksOrderId.textContent = '#' + sessionId.slice(-8).toUpperCase();
+        thanksOrder.hidden = false;
+      }
+    } else {
+      thanks.classList.add('cancel');
+      thanksEyebrow.textContent = 'Pago no completado';
+      thanksTitle.innerHTML = 'No te <em>preocupes,</em><br>tu pedido sigue ahí.';
+      thanksMessage.textContent = 'No te hemos cobrado nada. Hemos guardado tu pedido — cuando quieras, vuelve y termina la compra.';
+      thanksIconPath.setAttribute('d', 'M6 6l12 12M6 18L18 6');
+      thanksOrder.hidden = true;
+    }
+    thanks.classList.add('open');
+    thanks.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideThanks() {
+    thanks.classList.remove('open');
+    thanks.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  thanksClose.addEventListener('click', e => { e.preventDefault(); hideThanks(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && thanks.classList.contains('open')) hideThanks();
+  });
+
+  (function handleReturnFromStripe() {
+    const params = new URLSearchParams(window.location.search);
+    const orderParam = params.get('order');
+    if (orderParam === 'success') {
+      // Limpiar carrito — el pago se ha completado.
+      cart = {};
+      persist();
+      renderCart();
+      closeDrawer();
+      showThanks({ kind: 'success', sessionId: params.get('session_id') });
+      // Limpiar la URL para no repetir el modal al refrescar
+      history.replaceState({}, '', window.location.pathname + window.location.hash);
+    } else if (orderParam === 'cancel') {
+      showThanks({ kind: 'cancel' });
+      history.replaceState({}, '', window.location.pathname + window.location.hash);
+    }
+  })();
 
   /* ---------- Reveal animations (respeta reduce-motion) ---------- */
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

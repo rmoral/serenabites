@@ -1,0 +1,11 @@
+{
+  "name": "serenabites",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Serena Bites — site + delivery funnel + Stripe Checkout",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
