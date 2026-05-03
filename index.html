@@ -3,13 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Serena Bites — Real food, Mediterranean soul</title>
-<meta name="description" content="Serena Bites — Cocina mediterránea cuidada. Bowls, pokés, brunch y açaí elaborados con producto de temporada y técnica honesta.">
+<title>Serena Bites — Pide a domicilio · Bowls, pokés, brunch &amp; açaí</title>
+<meta name="description" content="Serena Bites — Cocina mediterránea cuidada a domicilio. Bowls, pokés, brunch y açaí con producto de temporada. Pide en 2 minutos: entrega 30–40 min.">
+<meta name="theme-color" content="#f4ecd8">
+<link rel="canonical" href="https://serenabites.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:title" content="Serena Bites — Real food, Mediterranean soul">
+<meta property="og:description" content="Bowls, pokés, brunch y açaí mediterráneos a domicilio. Producto de temporada, técnica honesta. Entrega en 30–40 min.">
+<meta property="og:url" content="https://serenabites.com/">
+<meta property="og:image" content="https://serenabites.com/brand/logo-horizontal.svg">
+<meta property="og:locale" content="es_ES">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Serena Bites — Pide a domicilio">
+<meta name="twitter:description" content="Bowls, pokés, brunch y açaí mediterráneos a domicilio. Entrega en 30–40 min.">
+<meta name="twitter:image" content="https://serenabites.com/brand/logo-horizontal.svg">
+
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <link rel="apple-touch-icon" href="brand/logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Bricolage+Grotesque:opsz,wght@10..48,300;10..48,400;10..48,500;10..48,600;10..48,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Restaurant -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Serena Bites",
+  "description": "Cocina mediterránea cuidada. Bowls, pokés, brunch y açaí con producto de temporada.",
+  "url": "https://serenabites.com/",
+  "image": "https://serenabites.com/brand/logo-horizontal.svg",
+  "servesCuisine": ["Mediterránea", "Bowls", "Poké", "Brunch"],
+  "priceRange": "€€",
+  "acceptsReservations": "True",
+  "hasMenu": "https://serenabites.com/carta-serena-bites.pdf",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "10:00", "closes": "23:00" }
+  ],
+  "potentialAction": {
+    "@type": "OrderAction",
+    "target": "https://serenabites.com/#pedir",
+    "deliveryMethod": ["http://purl.org/goodrelations/v1#DeliveryModeOwnFleet", "http://purl.org/goodrelations/v1#DeliveryModePickUp"]
+  }
+}
+</script>
 <style>
   :root {
     --cream:      #f4ecd8;
@@ -1048,21 +1091,684 @@
     .hero-values { gap: 0.5rem; }
     .value-item { flex: 1 1 45%; min-width: 130px; border-right: none; padding: 0 !important; }
   }
+
+  /* ============ ORDER FUNNEL ============ */
+
+  /* Postcode checker en hero */
+  .zone-check {
+    margin-top: 1.6rem;
+    padding: 1.1rem 1.2rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    max-width: 460px;
+  }
+  .zone-check-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-bottom: 0.6rem;
+  }
+  .zone-check-form { display: flex; gap: 0.5rem; }
+  .zone-check input {
+    flex: 1; min-width: 0;
+    border: none;
+    border-bottom: 1.5px solid var(--ink);
+    background: transparent;
+    padding: 0.55rem 0.2rem;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .zone-check input::placeholder { color: var(--ink-soft); opacity: 0.55; font-style: italic; }
+  .zone-check input:focus { border-color: var(--olive-deep); }
+  .zone-check button {
+    border: none;
+    background: var(--olive-deep);
+    color: var(--cream);
+    border-radius: 99px;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .zone-check button:hover { background: var(--olive); }
+  .zone-result {
+    margin-top: 0.7rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    min-height: 1.2em;
+    line-height: 1.4;
+  }
+  .zone-result.ok { color: var(--olive-deep); }
+  .zone-result.ko { color: var(--terra-deep); }
+  .zone-result strong { color: var(--ink); font-weight: 500; }
+
+  /* Trust strip */
+  .trust-strip {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.4rem 2rem;
+  }
+  .trust-strip-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .trust-item svg { color: var(--olive-deep); flex-shrink: 0; }
+  .trust-item em { font-style: italic; color: var(--terra); font-family: var(--serif); }
+
+  /* Pedir section (platforms) */
+  .pedir {
+    padding: 6rem 2rem 4rem;
+    background: var(--cream);
+  }
+  .pedir-inner { max-width: 1300px; margin: 0 auto; }
+  .pedir-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+  .pedir-head h2 {
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    line-height: 1.02;
+  }
+  .pedir-head h2 em { font-style: italic; color: var(--olive-deep); }
+  .pedir-head p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 42ch;
+    margin-left: auto;
+  }
+  .platforms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .platform-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.4rem 1.3rem;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .platform-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--olive);
+    background: var(--cream-deep);
+  }
+  .platform-card.featured {
+    background: var(--olive-deep);
+    border-color: var(--olive-deep);
+    color: var(--cream);
+  }
+  .platform-card.featured:hover { background: var(--olive); }
+  .platform-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .platform-name em { font-style: italic; color: var(--terra); }
+  .platform-card.featured .platform-name em { color: var(--lemon); }
+  .platform-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.7;
+  }
+  .platform-arrow {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 1.1rem;
+    transition: transform 0.25s;
+  }
+  .platform-card:hover .platform-arrow { transform: translateX(4px); }
+
+  /* Add-to-cart en dish-card */
+  .dish-card { display: flex; flex-direction: column; }
+  .dish-cta {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+  .dish-add {
+    flex: 1;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 99px;
+    padding: 0.55rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .dish-add:hover { background: var(--ink); color: var(--cream); }
+  .dish-add svg { width: 14px; height: 14px; }
+
+  .dish-stepper {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--olive-deep);
+    color: var(--cream);
+    border-radius: 99px;
+    padding: 0.3rem 0.4rem;
+  }
+  .dish-card.in-cart .dish-add { display: none; }
+  .dish-card.in-cart .dish-stepper { display: inline-flex; }
+  .dish-stepper button {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(244, 236, 216, 0.15);
+    color: var(--cream);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .dish-stepper button:hover { background: rgba(244, 236, 216, 0.3); }
+  .dish-stepper-qty {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    min-width: 1.4rem;
+    text-align: center;
+  }
+
+  /* Floating cart bar (desktop + mobile) */
+  .cart-bar {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 90;
+    background: var(--olive-deep);
+    color: var(--cream);
+    border-radius: 99px;
+    padding: 0.85rem 1.4rem 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    cursor: pointer;
+    border: none;
+    font-family: var(--sans);
+    box-shadow: 0 18px 40px -12px rgba(29, 42, 20, 0.5);
+    transform: translateY(120%);
+    transition: transform 0.4s cubic-bezier(.2,.7,.3,1), background 0.2s;
+  }
+  .cart-bar.active { transform: translateY(0); }
+  .cart-bar:hover { background: var(--olive); }
+  .cart-bar-count {
+    background: var(--lemon);
+    color: var(--olive-deep);
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.92rem;
+  }
+  .cart-bar-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-align: left;
+  }
+  .cart-bar-text strong { font-weight: 500; font-size: 0.92rem; }
+  .cart-bar-text span {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .cart-bar-arrow {
+    font-size: 1.2rem;
+    margin-left: 0.3rem;
+  }
+
+  /* Cart drawer */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(29, 42, 20, 0.55);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(460px, 100vw);
+    background: var(--cream);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(.2,.7,.3,1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -20px 0 60px -20px rgba(29, 42, 20, 0.3);
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 1.6rem;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .drawer-header h3 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .drawer-header h3 em { font-style: italic; color: var(--terra); }
+  .drawer-close {
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .drawer-close:hover { background: var(--cream-deep); }
+  .drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.4rem 1.6rem;
+  }
+
+  /* Mode tabs (delivery / pickup) */
+  .mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--cream-deep);
+    border-radius: 99px;
+    padding: 4px;
+    margin-bottom: 1.6rem;
+  }
+  .mode-tab {
+    border: none;
+    background: transparent;
+    padding: 0.65rem 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+  }
+  .mode-tab.active {
+    background: var(--olive-deep);
+    color: var(--cream);
+  }
+
+  .cart-items { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.4rem; }
+  .cart-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 0.85rem;
+    align-items: center;
+  }
+  .cart-item-img {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: var(--cream-deep);
+    overflow: hidden;
+  }
+  .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-item-info { min-width: 0; }
+  .cart-item-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cart-item-price {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .cart-item-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 2px;
+  }
+  .cart-item-stepper button {
+    width: 26px; height: 26px;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .cart-item-stepper button:hover { background: var(--cream-deep); }
+  .cart-item-stepper span {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    min-width: 1.2rem;
+    text-align: center;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--ink-soft);
+  }
+  .cart-empty-icon { font-size: 3rem; margin-bottom: 0.6rem; opacity: 0.5; }
+  .cart-empty p { font-family: var(--serif); font-style: italic; font-size: 1.1rem; }
+
+  /* Checkout form */
+  .checkout {
+    border-top: 1px solid var(--line);
+    padding-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .field label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+  }
+  .field input,
+  .field textarea {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.65rem 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus,
+  .field textarea:focus { border-color: var(--olive); }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+  .field-hint {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .drawer-footer {
+    padding: 1.2rem 1.6rem 1.4rem;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    flex-shrink: 0;
+  }
+  .totals {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .totals .row { display: flex; justify-content: space-between; }
+  .totals .row.total {
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .totals .row.total span:last-child { color: var(--olive-deep); }
+
+  .btn-checkout {
+    width: 100%;
+    background: var(--olive-deep);
+    color: var(--cream);
+    border: none;
+    border-radius: 99px;
+    padding: 1rem 1.2rem;
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-checkout:hover { background: var(--olive); }
+  .btn-checkout:disabled {
+    background: var(--cream-deep);
+    color: var(--ink-soft);
+    cursor: not-allowed;
+  }
+  .btn-checkout svg { width: 18px; height: 18px; }
+  .btn-checkout-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 0.7rem;
+  }
+
+  /* Mobile menu */
+  .nav-burger {
+    display: none;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+  .nav-burger svg { display: block; }
+
+  /* Channels (visit) */
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+    text-align: left;
+  }
+  .channel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .channel.featured {
+    background: var(--olive-deep);
+    border-color: var(--olive-deep);
+    color: var(--cream);
+  }
+  .channel-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.7;
+  }
+  .channel h4 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .channel h4 em { font-style: italic; color: var(--terra); }
+  .channel.featured h4 em { color: var(--lemon); }
+  .channel p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .channel.featured p { color: rgba(244, 236, 216, 0.78); }
+  .channel-cta {
+    margin-top: auto;
+    align-self: flex-start;
+    border: 1.5px solid currentColor;
+    background: transparent;
+    color: inherit;
+    border-radius: 99px;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .channel-cta:hover {
+    background: currentColor;
+  }
+  .channel-cta:hover span { color: var(--cream); }
+  .channel.featured .channel-cta {
+    background: var(--lemon);
+    border-color: var(--lemon);
+    color: var(--olive-deep);
+  }
+  .channel.featured .channel-cta:hover { background: var(--lemon-soft); border-color: var(--lemon-soft); }
+
+  @media (max-width: 900px) {
+    .nav-burger { display: inline-flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(320px, 80vw);
+      height: 100vh;
+      background: var(--cream);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 5.5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(.2,.7,.3,1);
+      box-shadow: -10px 0 30px -10px rgba(29, 42, 20, 0.2);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li { border-top: 1px solid var(--line); }
+    .nav-links li:last-child { border-top: 1px solid var(--line); }
+    .nav-links a { display: block; padding: 1rem 0; font-size: 1.1rem; }
+    .nav-links .nav-cta { margin-top: 1rem; text-align: center; }
+
+    .pedir { padding: 4rem 1.2rem 3rem; }
+    .pedir-head { grid-template-columns: 1fr; gap: 1rem; }
+    .pedir-head p { margin-left: 0; }
+
+    .channels { grid-template-columns: 1fr; }
+    .trust-strip { padding: 1.2rem 1.2rem; }
+    .trust-strip-inner { gap: 1.2rem; }
+
+    .cart-bar {
+      left: 1rem; right: 1rem;
+      bottom: 1rem;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>
 </head>
 <body>
 
 <!-- ============ NAV ============ -->
 <nav id="nav">
-  <a href="#" class="mono-logo">
+  <a href="#" class="mono-logo" aria-label="Serena Bites — Inicio">
     <span class="mono-mark"><span>sb</span></span>
     <span class="mono-wordmark">Serena<br><em>Bites.</em></span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#filosofia">Filosofía</a></li>
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#carta">Carta</a></li>
+    <li><a href="#filosofia">Filosofía</a></li>
     <li><a href="#experiencia">El método</a></li>
-    <li><a href="#visita" class="nav-cta">Reserva →</a></li>
+    <li><a href="#visita">Visítanos</a></li>
+    <li><a href="#carta" class="nav-cta">Pedir →</a></li>
   </ul>
 </nav>
 
@@ -1086,18 +1792,26 @@
         cocinada <span class="amp">&amp;</span><br>
         servida con <span class="ul">cuidado.</span>
       </h1>
-      <p class="hero-sub">Bowls, pokés, brunch y açaí mediterráneos — producto de temporada, técnica honesta y sabor que nutre. El tipo de comida que apetece a diario.</p>
+      <p class="hero-sub">Bowls, pokés, brunch y açaí mediterráneos — producto de temporada, técnica honesta y sabor que nutre. <em>Lo pides, te lo llevamos a casa en 30–40 min.</em></p>
       <div class="hero-ctas">
         <a href="#carta" class="btn btn-primary">
-          Descubre la carta
+          Pedir a domicilio
           <span class="btn-arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </a>
-        <a href="carta-serena-bites.pdf" download class="btn btn-secondary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Carta en PDF
+        <a href="#carta" class="btn btn-secondary">
+          Ver la carta
         </a>
+      </div>
+
+      <div class="zone-check" aria-labelledby="zoneLabel">
+        <div class="zone-check-label" id="zoneLabel">¿Llegamos a tu casa?</div>
+        <form class="zone-check-form" id="zoneForm" novalidate>
+          <input type="text" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" placeholder="Tu código postal" id="zoneInput" aria-label="Código postal" autocomplete="postal-code">
+          <button type="submit">Comprobar</button>
+        </form>
+        <div class="zone-result" id="zoneResult" role="status" aria-live="polite"></div>
       </div>
 
       <div class="hero-values">
@@ -1133,13 +1847,13 @@
       </svg>
 
       <div class="photo photo-1">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80" alt="Bowl mediterráneo con quinoa">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80" alt="Bowl mediterráneo con quinoa" width="700" height="700" fetchpriority="high">
       </div>
       <div class="photo photo-2">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Tostada de aguacate con huevo">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Tostada de aguacate con huevo" width="600" height="600" loading="lazy">
       </div>
       <div class="photo photo-3">
-        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=700&q=80" alt="Poké de salmón fresco">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=700&q=80" alt="Poké de salmón fresco" width="700" height="700" loading="lazy">
       </div>
       <div class="vert-caption">Frame N°01 · spring menu</div>
     </div>
@@ -1161,6 +1875,28 @@
     <div class="marquee-item">Hecho cada día <span class="star">✦</span></div>
     <div class="marquee-item">Sabor que nutre <span class="star">✦</span></div>
     <div class="marquee-item">Eat real <span class="star">✦</span></div>
+  </div>
+</div>
+
+<!-- ============ TRUST STRIP ============ -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Entrega en <em>30–40 min</em></span>
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 7h18l-2 12H5L3 7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span>Pedido mínimo <em>15 €</em></span>
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 13l4-7h10l4 7v6H3v-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="17" r="1.5" fill="currentColor"/><circle cx="16" cy="17" r="1.5" fill="currentColor"/></svg>
+      <span>Envío gratis desde <em>25 €</em></span>
+    </div>
+    <div class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Cocinado <em>cada día</em></span>
+    </div>
   </div>
 </div>
 
@@ -1442,6 +2178,47 @@
   </div>
 </section>
 
+<!-- ============ PEDIR / PLATAFORMAS ============ -->
+<section class="pedir" id="pedir">
+  <div class="pedir-inner">
+    <div class="pedir-head">
+      <div>
+        <div class="eyebrow">N°03 · Pedir</div>
+        <h2>También en <em>tu app</em><br>favorita.</h2>
+      </div>
+      <p>Pídelo directo aquí — vas más rápido y sin comisión extra. O usa la app que ya tienes en el bolsillo. Tú eliges.</p>
+    </div>
+
+    <div class="platforms">
+      <a href="#carta" class="platform-card featured">
+        <div class="platform-meta">⚡ Más rápido · sin comisión</div>
+        <div class="platform-name">Pide <em>aquí</em></div>
+        <div class="platform-arrow">→</div>
+      </a>
+      <a href="https://glovoapp.com/" target="_blank" rel="noopener" class="platform-card" data-platform="glovo">
+        <div class="platform-meta">A domicilio</div>
+        <div class="platform-name">Glovo</div>
+        <div class="platform-arrow">→</div>
+      </a>
+      <a href="https://www.ubereats.com/" target="_blank" rel="noopener" class="platform-card" data-platform="ubereats">
+        <div class="platform-meta">A domicilio</div>
+        <div class="platform-name">Uber Eats</div>
+        <div class="platform-arrow">→</div>
+      </a>
+      <a href="https://deliveroo.es/" target="_blank" rel="noopener" class="platform-card" data-platform="deliveroo">
+        <div class="platform-meta">A domicilio</div>
+        <div class="platform-name">Deliveroo</div>
+        <div class="platform-arrow">→</div>
+      </a>
+      <a href="https://www.just-eat.es/" target="_blank" rel="noopener" class="platform-card" data-platform="justeat">
+        <div class="platform-meta">A domicilio</div>
+        <div class="platform-name">Just Eat</div>
+        <div class="platform-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ EXPERIENCIA / EL MÉTODO ============ -->
 <section class="experience" id="experiencia">
   <div class="exp-inner">
@@ -1498,22 +2275,43 @@
 <section class="visit" id="visita">
   <div class="visit-bg-text">hola.</div>
   <div class="visit-inner">
-    <div class="eyebrow" style="justify-content: center;">N°04 · Visítanos</div>
-    <h2>Una mesa esperándote,<br><em>cuando quieras.</em></h2>
-    <p>Quédate a comer con calma, recógelo en barra o pídelo a casa. Nosotros nos encargamos del resto — tú elige cómo te apetece más hoy.</p>
+    <div class="eyebrow" style="justify-content: center;">N°05 · Cómo te lo servimos</div>
+    <h2>Tres formas de comer<br><em>en Serena.</em></h2>
+    <p>A casa, en la oficina o aquí a la mesa. Nosotros nos encargamos del resto — tú elige cómo te apetece más hoy.</p>
 
-    <div class="visit-info">
+    <div class="channels">
+      <div class="channel featured">
+        <div class="channel-num">01 / Más rápido</div>
+        <h4>A <em>domicilio</em></h4>
+        <p>Pídelo aquí, te lo dejamos en casa en 30–40 min. Pedido mínimo 15 € · gratis desde 25 €.</p>
+        <a href="#carta" class="channel-cta"><span>Pedir ahora →</span></a>
+      </div>
+      <div class="channel">
+        <div class="channel-num">02 / En 15 min</div>
+        <h4>Recogida<br><em>en barra</em></h4>
+        <p>Pídelo en 1 minuto y pásalo a recoger. Sin colas, sin esperas — y sin comisión.</p>
+        <a href="#carta" class="channel-cta"><span>Pedir y recoger →</span></a>
+      </div>
+      <div class="channel">
+        <div class="channel-num">03 / Sin prisa</div>
+        <h4>En el <em>local</em></h4>
+        <p>Si te apetece quedarte, mejor. Reserva mesa o pasa cuando quieras — siempre hay sitio en barra.</p>
+        <a href="https://wa.me/34600000000?text=Hola%2C+me+gustar%C3%ADa+reservar+mesa+en+Serena+Bites" target="_blank" rel="noopener" class="channel-cta"><span>Reservar mesa →</span></a>
+      </div>
+    </div>
+
+    <div class="visit-info" style="margin-top: 4rem;">
       <div class="info-block">
         <h4>— Horario</h4>
         <p><em>Lun — Vie</em><br>09:00 — 22:00<br><br><em>Sáb — Dom</em><br>10:00 — 23:00</p>
       </div>
       <div class="info-block">
-        <h4>— Reservas</h4>
-        <p>+34 000 000 000<br>hola@<em>serenabites</em>.com<br><br><em>Para grupos</em><br>+10 personas</p>
+        <h4>— Contacto</h4>
+        <p><a href="tel:+34600000000">+34 600 000 000</a><br><a href="mailto:hola@serenabites.com">hola@serenabites.com</a><br><br><em>Para grupos</em><br>+10 personas</p>
       </div>
       <div class="info-block">
         <h4>— Dirección</h4>
-        <p><em>Por anunciar</em><br>Próxima apertura<br><br><em>Síguenos</em><br>@serenabites</p>
+        <p><em>Por anunciar</em><br>Próxima apertura<br><br><em>Síguenos</em><br><a href="https://instagram.com/serenabites" target="_blank" rel="noopener">@serenabites</a></p>
       </div>
     </div>
   </div>
@@ -1532,6 +2330,15 @@
       <div class="footer-tagline">Real food. <em>Mediterranean</em> soul.</div>
     </div>
     <div class="footer-col">
+      <h5>— Pedir</h5>
+      <ul>
+        <li><a href="#carta">Pedir a domicilio</a></li>
+        <li><a href="#carta">Pedir y recoger</a></li>
+        <li><a href="#pedir">En tus apps</a></li>
+        <li><a href="#visita">Reservar mesa</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
       <h5>— Carta</h5>
       <ul>
         <li><a href="#carta">Pokés &amp; Bowls</a></li>
@@ -1543,10 +2350,10 @@
     <div class="footer-col">
       <h5>— Contacto</h5>
       <ul>
-        <li>+34 000 000 000</li>
-        <li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660e090a0726150314030807040f1203154805090b">[email&#160;protected]</a></li>
-        <li>@serenabites</li>
-        <li><a href="#visita">Reservas</a></li>
+        <li><a href="tel:+34600000000">+34 600 000 000</a></li>
+        <li><a href="mailto:hola@serenabites.com">hola@serenabites.com</a></li>
+        <li><a href="https://instagram.com/serenabites" target="_blank" rel="noopener">@serenabites</a></li>
+        <li><a href="#visita">Visítanos</a></li>
       </ul>
     </div>
   </div>
@@ -1557,40 +2364,416 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<!-- ============ CART BAR + DRAWER ============ -->
+<button class="cart-bar" id="cartBar" type="button" aria-label="Ver tu pedido">
+  <span class="cart-bar-count" id="cartCount">0</span>
+  <span class="cart-bar-text">
+    <strong id="cartTotal">0,00 €</strong>
+    <span>Tu pedido</span>
+  </span>
+  <span class="cart-bar-arrow" aria-hidden="true">→</span>
+</button>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-header">
+    <h3 id="drawerTitle">Tu <em>pedido</em></h3>
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <div class="mode-tabs" role="tablist" aria-label="Modo de entrega">
+      <button class="mode-tab active" data-mode="delivery" role="tab" aria-selected="true">A domicilio</button>
+      <button class="mode-tab" data-mode="pickup" role="tab" aria-selected="false">Recoger en barra</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">🥗</div>
+      <p>Tu pedido está vacío.<br>Añade tu primer plato desde la carta.</p>
+    </div>
+
+    <div class="checkout" id="checkoutBlock" hidden>
+      <div class="field" data-mode-only="delivery">
+        <label for="addressInput">Dirección de entrega</label>
+        <input type="text" id="addressInput" placeholder="Calle, número, piso…" autocomplete="street-address" required>
+      </div>
+      <div class="field-row" data-mode-only="delivery">
+        <div class="field">
+          <label for="postcodeInput">Código postal</label>
+          <input type="text" id="postcodeInput" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" required>
+        </div>
+        <div class="field">
+          <label for="cityInput">Ciudad</label>
+          <input type="text" id="cityInput" autocomplete="address-level2" placeholder="Madrid">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="nameInput">Nombre</label>
+          <input type="text" id="nameInput" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="phoneInput">Teléfono</label>
+          <input type="tel" id="phoneInput" autocomplete="tel" inputmode="tel" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="notesInput">Notas para cocina (opcional)</label>
+        <textarea id="notesInput" placeholder="Sin cebolla, alergias, instrucciones de entrega…"></textarea>
+      </div>
+      <p class="field-hint">Al pulsar “Enviar pedido” abriremos WhatsApp con tu pedido listo. Confirmamos la disponibilidad y el pago al recibirlo.</p>
+    </div>
+  </div>
+  <div class="drawer-footer" id="drawerFooter" hidden>
+    <div class="totals">
+      <div class="row"><span>Subtotal</span><span id="sumSubtotal">0,00 €</span></div>
+      <div class="row" id="rowDelivery"><span>Envío</span><span id="sumDelivery">—</span></div>
+      <div class="row total"><span>Total</span><span id="sumTotal">0,00 €</span></div>
+    </div>
+    <button class="btn-checkout" id="btnCheckout" type="button">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 12c0 4.4-3.6 8-8 8-1.4 0-2.7-.4-3.8-1L4 20l1-4.2c-.6-1.1-1-2.4-1-3.8 0-4.4 3.6-8 8-8s8 3.6 8 8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span id="btnCheckoutLabel">Enviar pedido por WhatsApp</span>
+    </button>
+    <div class="btn-checkout-note">Confirmación en menos de 5 min</div>
+  </div>
+</aside>
+
+<script>
+  /* ============================================================
+   *  CONFIG — datos a sustituir por los reales en producción
+   * ============================================================ */
+  const CONFIG = {
+    whatsapp: '34600000000',           // sin '+' ni espacios
+    minOrder: 15,
+    deliveryFee: 2.5,
+    freeDeliveryFrom: 25,
+    deliveryEta: '30–40 min',
+    pickupEta: '15 min',
+    // Códigos postales con cobertura (Madrid centro como ejemplo)
+    coverPrefixes: ['28004','28005','28006','28010','28012','28013','28014','28015','28020']
+  };
+
+  const fmt = n => n.toFixed(2).replace('.', ',') + ' €';
+
+  /* ---------- Nav scroll + mobile burger ---------- */
   const nav = document.getElementById('nav');
+  const navLinks = document.getElementById('navLinks');
+  const navBurger = document.getElementById('navBurger');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+  navBurger?.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks?.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('open');
+      navBurger?.setAttribute('aria-expanded', 'false');
+    }
   });
 
+  /* ---------- Carta: tabs accesibles ---------- */
   const tabs = document.querySelectorAll('.menu-tab');
   const cats = document.querySelectorAll('.menu-category');
   tabs.forEach(t => {
+    t.setAttribute('role', 'tab');
+    t.setAttribute('aria-selected', t.classList.contains('active') ? 'true' : 'false');
     t.addEventListener('click', () => {
       const cat = t.dataset.cat;
-      tabs.forEach(x => x.classList.remove('active'));
+      tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
       cats.forEach(x => x.classList.remove('active'));
       t.classList.add('active');
+      t.setAttribute('aria-selected', 'true');
       document.querySelector(`.menu-category[data-cat="${cat}"]`).classList.add('active');
     });
   });
 
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.pillar, .dish-card, .exp-feature, .info-block, .builder').forEach((el, i) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = `opacity .8s ease ${i * 0.04}s, transform .8s ease ${i * 0.04}s`;
-    obs.observe(el);
+  /* ---------- Postcode check ---------- */
+  const zoneForm = document.getElementById('zoneForm');
+  const zoneInput = document.getElementById('zoneInput');
+  const zoneResult = document.getElementById('zoneResult');
+  zoneForm?.addEventListener('submit', e => {
+    e.preventDefault();
+    const cp = (zoneInput.value || '').trim();
+    if (!/^\d{5}$/.test(cp)) {
+      zoneResult.className = 'zone-result ko';
+      zoneResult.innerHTML = 'Introduce un código postal válido (5 dígitos).';
+      return;
+    }
+    if (CONFIG.coverPrefixes.includes(cp)) {
+      zoneResult.className = 'zone-result ok';
+      zoneResult.innerHTML = `<strong>¡Llegamos!</strong> Entrega ${CONFIG.deliveryEta} en CP ${cp}. <a href="#carta" style="color:inherit;text-decoration:underline;">Empieza tu pedido →</a>`;
+      try { localStorage.setItem('sb_postcode', cp); } catch (_) {}
+    } else {
+      zoneResult.className = 'zone-result ko';
+      zoneResult.innerHTML = `Aún no llegamos a <strong>${cp}</strong>, pero puedes <a href="#pedir" style="color:inherit;text-decoration:underline;">pedir en Glovo / Uber Eats</a> o <a href="#carta" style="color:inherit;text-decoration:underline;">recogerlo en barra</a>.`;
+    }
   });
+
+  /* ---------- Cart: state + persistence ---------- */
+  const STORAGE_KEY = 'sb_cart_v1';
+  let cart = {};
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) cart = JSON.parse(saved);
+  } catch (_) { cart = {}; }
+  const persist = () => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (_) {} };
+
+  /* ---------- Inject add-to-cart buttons en cada dish-card ---------- */
+  document.querySelectorAll('.dish-card').forEach(card => {
+    const numEl = card.querySelector('.dish-num');
+    const nameEl = card.querySelector('.dish-name');
+    const priceEl = card.querySelector('.dish-price');
+    if (!nameEl || !priceEl) return;
+
+    const id = (numEl?.textContent || nameEl.textContent).replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    const name = nameEl.textContent.trim();
+    const price = parseFloat(priceEl.textContent.replace(/[^\d,]/g, '').replace(',', '.'));
+    const img = card.querySelector('.dish-img img')?.src || '';
+
+    card.dataset.id = id;
+    card.dataset.name = name;
+    card.dataset.price = price;
+    card.dataset.img = img;
+
+    const cta = document.createElement('div');
+    cta.className = 'dish-cta';
+    cta.innerHTML = `
+      <button type="button" class="dish-add" aria-label="Añadir ${name} a tu pedido">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Añadir
+      </button>
+      <div class="dish-stepper" aria-label="Cantidad de ${name}">
+        <button type="button" data-act="dec" aria-label="Quitar uno">−</button>
+        <span class="dish-stepper-qty">0</span>
+        <button type="button" data-act="inc" aria-label="Añadir uno">+</button>
+      </div>
+    `;
+    card.appendChild(cta);
+
+    cta.querySelector('.dish-add').addEventListener('click', () => addToCart(id, { name, price, img }));
+    cta.querySelector('[data-act="inc"]').addEventListener('click', () => addToCart(id, { name, price, img }));
+    cta.querySelector('[data-act="dec"]').addEventListener('click', () => removeFromCart(id));
+  });
+
+  function addToCart(id, info) {
+    if (!cart[id]) cart[id] = { ...info, qty: 0 };
+    cart[id].qty += 1;
+    persist(); renderCart();
+  }
+  function removeFromCart(id) {
+    if (!cart[id]) return;
+    cart[id].qty -= 1;
+    if (cart[id].qty <= 0) delete cart[id];
+    persist(); renderCart();
+  }
+
+  /* ---------- Cart UI ---------- */
+  const cartBar = document.getElementById('cartBar');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartItems = document.getElementById('cartItems');
+  const cartEmpty = document.getElementById('cartEmpty');
+  const checkoutBlock = document.getElementById('checkoutBlock');
+  const drawerFooter = document.getElementById('drawerFooter');
+  const drawer = document.getElementById('drawer');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerClose = document.getElementById('drawerClose');
+  const sumSubtotal = document.getElementById('sumSubtotal');
+  const sumDelivery = document.getElementById('sumDelivery');
+  const sumTotal = document.getElementById('sumTotal');
+  const rowDelivery = document.getElementById('rowDelivery');
+  const btnCheckout = document.getElementById('btnCheckout');
+
+  let mode = 'delivery'; // delivery | pickup
+
+  function renderCart() {
+    const entries = Object.entries(cart);
+    const totalQty = entries.reduce((a, [, v]) => a + v.qty, 0);
+    const subtotal = entries.reduce((a, [, v]) => a + v.qty * v.price, 0);
+
+    cartCount.textContent = totalQty;
+    cartTotal.textContent = fmt(subtotal);
+    cartBar.classList.toggle('active', totalQty > 0);
+
+    // Sync stepper en dish-cards
+    document.querySelectorAll('.dish-card').forEach(card => {
+      const id = card.dataset.id;
+      const qty = cart[id]?.qty || 0;
+      card.classList.toggle('in-cart', qty > 0);
+      const qtyEl = card.querySelector('.dish-stepper-qty');
+      if (qtyEl) qtyEl.textContent = qty;
+    });
+
+    // Render lista en drawer
+    if (entries.length === 0) {
+      cartEmpty.style.display = 'block';
+      cartItems.style.display = 'none';
+      checkoutBlock.hidden = true;
+      drawerFooter.hidden = true;
+      return;
+    }
+    cartEmpty.style.display = 'none';
+    cartItems.style.display = 'flex';
+    checkoutBlock.hidden = false;
+    drawerFooter.hidden = false;
+
+    cartItems.innerHTML = entries.map(([id, v]) => `
+      <div class="cart-item" data-id="${id}">
+        <div class="cart-item-img">${v.img ? `<img src="${v.img}" alt="" loading="lazy">` : ''}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name" title="${v.name}">${v.name}</div>
+          <div class="cart-item-price">${fmt(v.price)} · ${fmt(v.qty * v.price)}</div>
+        </div>
+        <div class="cart-item-stepper">
+          <button type="button" data-act="dec" aria-label="Quitar">−</button>
+          <span>${v.qty}</span>
+          <button type="button" data-act="inc" aria-label="Añadir">+</button>
+        </div>
+      </div>
+    `).join('');
+
+    cartItems.querySelectorAll('.cart-item').forEach(row => {
+      const id = row.dataset.id;
+      row.querySelector('[data-act="inc"]').addEventListener('click', () => addToCart(id, cart[id]));
+      row.querySelector('[data-act="dec"]').addEventListener('click', () => removeFromCart(id));
+    });
+
+    // Totals
+    const isDelivery = mode === 'delivery';
+    const fee = !isDelivery ? 0 : (subtotal >= CONFIG.freeDeliveryFrom ? 0 : CONFIG.deliveryFee);
+    sumSubtotal.textContent = fmt(subtotal);
+    if (isDelivery) {
+      rowDelivery.style.display = '';
+      sumDelivery.textContent = fee === 0 ? 'Gratis' : fmt(fee);
+    } else {
+      rowDelivery.style.display = 'none';
+    }
+    sumTotal.textContent = fmt(subtotal + fee);
+
+    // Pedido mínimo en delivery
+    const belowMin = isDelivery && subtotal < CONFIG.minOrder;
+    btnCheckout.disabled = belowMin;
+    document.getElementById('btnCheckoutLabel').textContent = belowMin
+      ? `Te faltan ${fmt(CONFIG.minOrder - subtotal)} para el mínimo`
+      : 'Enviar pedido por WhatsApp';
+  }
+
+  /* ---------- Drawer open/close ---------- */
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawerOverlay.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // Pre-fill postcode si hay cached
+    try {
+      const cached = localStorage.getItem('sb_postcode');
+      const pcEl = document.getElementById('postcodeInput');
+      if (cached && pcEl && !pcEl.value) pcEl.value = cached;
+    } catch (_) {}
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawerOverlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  cartBar.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  /* ---------- Mode tabs (delivery / pickup) ---------- */
+  document.querySelectorAll('.mode-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      mode = t.dataset.mode;
+      document.querySelectorAll('.mode-tab').forEach(x => {
+        const active = x === t;
+        x.classList.toggle('active', active);
+        x.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-mode-only]').forEach(el => {
+        el.style.display = el.dataset.modeOnly === mode ? '' : 'none';
+      });
+      renderCart();
+    });
+  });
+
+  /* ---------- Checkout → WhatsApp ---------- */
+  btnCheckout.addEventListener('click', () => {
+    const entries = Object.entries(cart);
+    if (entries.length === 0) return;
+    const subtotal = entries.reduce((a, [, v]) => a + v.qty * v.price, 0);
+    const isDelivery = mode === 'delivery';
+    const fee = !isDelivery ? 0 : (subtotal >= CONFIG.freeDeliveryFrom ? 0 : CONFIG.deliveryFee);
+    const total = subtotal + fee;
+
+    const name = (document.getElementById('nameInput').value || '').trim();
+    const phone = (document.getElementById('phoneInput').value || '').trim();
+    const notes = (document.getElementById('notesInput').value || '').trim();
+    const address = (document.getElementById('addressInput').value || '').trim();
+    const postcode = (document.getElementById('postcodeInput').value || '').trim();
+    const city = (document.getElementById('cityInput').value || '').trim();
+
+    if (!name || !phone) {
+      alert('Necesitamos tu nombre y teléfono para confirmar el pedido.');
+      return;
+    }
+    if (isDelivery && (!address || !postcode)) {
+      alert('Indícanos la dirección y el código postal de entrega.');
+      return;
+    }
+
+    const lines = [
+      `*Pedido — Serena Bites*`,
+      ``,
+      `*Modo:* ${isDelivery ? 'A domicilio' : 'Recogida en barra'}`,
+      `*Nombre:* ${name}`,
+      `*Teléfono:* ${phone}`,
+      isDelivery ? `*Dirección:* ${address}, ${postcode}${city ? ' ' + city : ''}` : null,
+      ``,
+      `*Pedido:*`,
+      ...entries.map(([, v]) => `· ${v.qty}× ${v.name} — ${fmt(v.qty * v.price)}`),
+      ``,
+      `Subtotal: ${fmt(subtotal)}`,
+      isDelivery ? `Envío: ${fee === 0 ? 'Gratis' : fmt(fee)}` : null,
+      `*Total: ${fmt(total)}*`,
+      notes ? `\n*Notas:* ${notes}` : null,
+      ``,
+      `ETA estimada: ${isDelivery ? CONFIG.deliveryEta : CONFIG.pickupEta}`
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${text}`, '_blank', 'noopener');
+  });
+
+  /* ---------- Reveal animations (respeta reduce-motion) ---------- */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.pillar, .dish-card, .exp-feature, .info-block, .builder, .platform-card, .channel').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity .8s ease ${i * 0.04}s, transform .8s ease ${i * 0.04}s`;
+      obs.observe(el);
+    });
+  }
+
+  /* ---------- Init ---------- */
+  renderCart();
 </script>
 
 </body>
