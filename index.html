@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serena Bites · Real food, Mediterranean soul</title>
+<meta name="description" content="Serena Bites — Cocina mediterránea cuidada. Bowls, pokés, brunch y açaí elaborados con producto de temporada y técnica honesta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fbf7ee;
+    --cream-deep: #f3ecd9;
+    --paper: #fefcf7;
+    --lemon: #f4c84a;
+    --lemon-deep: #d9a82f;
+    --lemon-soft: #f8dc7a;
+    --olive: #5b7f3a;
+    --olive-deep: #3d5c22;
+    --olive-soft: #7ba64c;
+    --terra: #c25a2c;
+    --terra-deep: #9a4520;
+    --ink: #2a3a1f;
+    --ink-soft: #5a6048;
+    --line: rgba(42, 58, 31, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(251, 247, 238, 0.95);
+    backdrop-filter: blur(14px);
+    padding: 0.8rem 2.5rem;
+    box-shadow: 0 1px 0 var(--line);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav-logo svg { width: 42px; height: 42px; }
+
+  .nav-logo-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .nav-logo-text em {
+    font-style: italic;
+    color: var(--terra);
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--olive); }
+
+  .nav-cta {
+    background: var(--olive-deep);
+    color: var(--cream) !important;
+    padding: 0.6rem 1.3rem;
+    border-radius: 99px;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--olive) !important; color: var(--cream) !important; }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fondo orgánico amarillo limón */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -8%; right: -12%;
+    width: 720px; height: 720px;
+    background: radial-gradient(circle, var(--lemon-soft) 0%, transparent 60%);
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -25%; left: -12%;
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, var(--olive-soft) 0%, transparent 60%);
+    opacity: 0.28;
+    z-index: 0;
+  }
+
+  .hero-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content { animation: fadeUp 1s ease-out; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--cream-deep);
+    color: var(--olive-deep);
+    padding: 0.5rem 1.1rem;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-tag .dot {
+    width: 7px; height: 7px;
+    background: var(--lemon-deep);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.96;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terra);
+    font-weight: 400;
+  }
+
+  .hero h1 .underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero h1 .underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: -0.05em;
+    right: -0.05em;
+    height: 0.18em;
+    background: var(--lemon);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    max-width: 42ch;
+    line-height: 1.55;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.8rem;
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--olive-deep);
+    color: var(--cream);
+  }
+
+  .btn-primary:hover {
+    background: var(--olive);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .btn-arrow { transition: transform 0.25s; }
+  .btn:hover .btn-arrow { transform: translateX(4px); }
+
+  /* Hero stats */
+  .hero-values {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .value-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--lemon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--olive-deep);
+    flex-shrink: 0;
+  }
+
+  .value-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.2;
+    font-style: italic;
+  }
+
+  /* Hero visual - collage */
+  .hero-visual {
+    position: relative;
+    height: 600px;
+    animation: fadeIn 1.4s ease-out 0.2s both;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .hero-visual .photo {
+    position: absolute;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -15px rgba(42, 58, 31, 0.22);
+  }
+
+  .hero-visual .photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-1 {
+    top: 0; left: 5%;
+    width: 56%; height: 54%;
+    transform: rotate(-3deg);
+    animation: float1 7s ease-in-out infinite;
+  }
+
+  .photo-2 {
+    top: 18%; right: 0;
+    width: 48%; height: 44%;
+    transform: rotate(4deg);
+    animation: float2 8s ease-in-out infinite;
+  }
+
+  .photo-3 {
+    bottom: 0; left: 14%;
+    width: 60%; height: 42%;
+    transform: rotate(2deg);
+    animation: float1 9s ease-in-out infinite reverse;
+  }
+
+  @keyframes float1 {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-12px); }
+  }
+
+  @keyframes float2 {
+    0%, 100% { transform: rotate(4deg) translateY(0); }
+    50% { transform: rotate(4deg) translateY(-10px); }
+  }
+
+  /* Sello flotante */
+  .seal {
+    position: absolute;
+    top: 4%;
+    right: 6%;
+    width: 115px;
+    height: 115px;
+    z-index: 3;
+    animation: rotate 22s linear infinite;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee {
+    background: var(--olive-deep);
+    color: var(--cream);
+    padding: 1.3rem 0;
+    overflow: hidden;
+    border-top: 3px solid var(--lemon);
+    border-bottom: 3px solid var(--lemon);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 38s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .marquee-item::after {
+    content: '✦';
+    color: var(--lemon);
+    font-size: 1.1rem;
+    font-style: normal;
+  }
+
+  /* ============ FILOSOFÍA ============ */
+  .filosofia {
+    padding: 8rem 2.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--olive);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--lemon-deep);
+  }
+
+  .filosofia h2 {
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    margin-bottom: 5rem;
+    max-width: 24ch;
+  }
+
+  .filosofia h2 em { font-style: italic; color: var(--olive-deep); }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .pillar {
+    background: var(--paper);
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--line);
+  }
+
+  .pillar:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -20px rgba(42, 58, 31, 0.18);
+  }
+
+  .pillar-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: var(--lemon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--olive-deep);
+  }
+
+  .pillar:nth-child(2) .pillar-icon { background: var(--olive-soft); color: var(--cream); }
+  .pillar:nth-child(3) .pillar-icon { background: var(--terra); color: var(--cream); }
+
+  .pillar h3 {
+    font-size: 1.55rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .pillar p {
+    color: var(--ink-soft);
+    line-height: 1.65;
+    font-size: 0.97rem;
+  }
+
+  /* ============ CARTA ============ */
+  .menu {
+    background: var(--paper);
+    padding: 8rem 2.5rem;
+    border-radius: 60px 60px 0 0;
+    margin-top: 2rem;
+  }
+
+  .menu-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .menu-header h2 {
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1;
+    max-width: 18ch;
+  }
+
+  .menu-header h2 em { font-style: italic; color: var(--olive-deep); }
+
+  .menu-tabs {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .menu-tab {
+    padding: 0.7rem 1.4rem;
+    background: transparent;
+    border: 2px solid var(--line);
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .menu-tab:hover { border-color: var(--olive); }
+
+  .menu-tab.active {
+    background: var(--olive-deep);
+    color: var(--cream);
+    border-color: var(--olive-deep);
+  }
+
+  .menu-category {
+    display: none;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .menu-category.active { display: block; }
+
+  .category-intro {
+    margin-bottom: 3rem;
+    max-width: 60ch;
+  }
+
+  .category-intro h3 {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .category-intro h3 em { font-style: italic; color: var(--olive-deep); }
+
+  .category-intro p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  .dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .dish-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--line);
+  }
+
+  .dish-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -16px rgba(42, 58, 31, 0.16);
+  }
+
+  .dish-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: var(--cream-deep);
+    position: relative;
+  }
+
+  .dish-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+
+  .dish-card:hover .dish-img img { transform: scale(1.06); }
+
+  .dish-tag {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    background: var(--cream);
+    color: var(--olive-deep);
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .dish-tag.veg { background: var(--olive-soft); color: var(--cream); }
+  .dish-tag.signature { background: var(--lemon); color: var(--olive-deep); }
+  .dish-tag.sweet { background: var(--terra); color: var(--cream); }
+
+  .dish-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .dish-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .dish-price {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--olive-deep);
+    white-space: nowrap;
+  }
+
+  .dish-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* ============ BUILD YOUR OWN ============ */
+  .builder {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--olive-deep);
+    color: var(--cream);
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .builder::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--lemon) 0%, transparent 65%);
+    opacity: 0.15;
+    z-index: 0;
+  }
+
+  .builder-inner { position: relative; z-index: 1; }
+
+  .builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(251, 247, 238, 0.18);
+  }
+
+  .builder-header h3 {
+    font-size: 2.2rem;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+
+  .builder-header h3 em { font-style: italic; color: var(--lemon); }
+
+  .builder-header p {
+    color: rgba(251, 247, 238, 0.7);
+    font-size: 0.95rem;
+    max-width: 30ch;
+    text-align: right;
+  }
+
+  .builder-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    background: var(--lemon);
+    color: var(--olive-deep);
+    padding: 0.5rem 1.1rem;
+    border-radius: 99px;
+    font-family: 'Fraunces', serif;
+    margin-top: 0.5rem;
+  }
+
+  .builder-price strong {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .builder-price span {
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .builder-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .builder-step {
+    background: rgba(251, 247, 238, 0.06);
+    border: 1px solid rgba(251, 247, 238, 0.12);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    color: var(--lemon);
+    font-style: italic;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    color: var(--cream);
+  }
+
+  .step-options {
+    list-style: none;
+    color: rgba(251, 247, 238, 0.78);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .step-options li {
+    padding: 0.15rem 0;
+  }
+
+  .step-options li::before {
+    content: '— ';
+    color: var(--lemon);
+    margin-right: 0.3rem;
+  }
+
+  .menu-download {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .menu-download p {
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ============ EXPERIENCIA ============ */
+  .experience {
+    padding: 8rem 2.5rem;
+    background: var(--cream);
+  }
+
+  .exp-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .experience h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    max-width: 22ch;
+  }
+
+  .experience h2 em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .experience > .exp-inner > p {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin-bottom: 4rem;
+    line-height: 1.6;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .exp-feature {
+    padding: 2rem;
+    background: var(--paper);
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .exp-feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--cream-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--olive-deep);
+  }
+
+  .exp-feature:nth-child(2) .exp-feature-icon { background: var(--lemon); }
+  .exp-feature:nth-child(3) .exp-feature-icon { background: var(--olive-soft); color: var(--cream); }
+  .exp-feature:nth-child(4) .exp-feature-icon { background: var(--terra); color: var(--cream); }
+
+  .exp-feature h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-feature p {
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ============ VISITA ============ */
+  .visit {
+    padding: 8rem 2.5rem;
+    text-align: center;
+    background: var(--paper);
+  }
+
+  .visit-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .visit h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .visit h2 em { font-style: italic; color: var(--olive-deep); }
+
+  .visit > .visit-inner > p {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 auto 3.5rem;
+  }
+
+  .visit-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .info-block {
+    padding: 2rem 1rem;
+    border-top: 2px solid var(--lemon);
+    text-align: left;
+  }
+
+  .info-block h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--olive);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .info-block p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 2.5rem 2rem;
+    text-align: center;
+  }
+
+  footer .nav-logo {
+    color: var(--cream);
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    opacity: 0.75;
+    margin-bottom: 3rem;
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(251, 247, 238, 0.12);
+    font-size: 0.82rem;
+    opacity: 0.55;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.2rem; }
+    nav.scrolled { padding: 0.7rem 1.2rem; }
+    .nav-links { display: none; }
+
+    .hero { padding: 6rem 1.2rem 2rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { height: 400px; order: -1; }
+    .seal { width: 80px; height: 80px; }
+
+    .filosofia, .menu, .experience, .visit { padding: 5rem 1.2rem; }
+    .menu { border-radius: 36px 36px 0 0; }
+
+    .pillars { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .visit-info { grid-template-columns: 1fr; }
+
+    .menu-header { flex-direction: column; align-items: flex-start; }
+
+    .builder { padding: 2rem 1.5rem; }
+    .builder-steps { grid-template-columns: 1fr 1fr; }
+    .builder-header { flex-direction: column; align-items: flex-start; }
+    .builder-header p { text-align: left; }
+  }
+
+  @media (max-width: 500px) {
+    .builder-steps { grid-template-columns: 1fr; }
+    .dishes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <!-- Logo Citrus Garden: limonero -->
+    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <!-- Hoja izquierda -->
+      <path d="M 15 27 Q 19 17 29 21 Q 25 30 15 27 Z" fill="#5b7f3a"/>
+      <!-- Hoja derecha -->
+      <path d="M 45 27 Q 41 17 31 21 Q 35 30 45 27 Z" fill="#7ba64c"/>
+      <!-- Limón -->
+      <ellipse cx="30" cy="36" rx="14" ry="12" fill="#f4c84a"/>
+      <ellipse cx="26" cy="33" rx="3" ry="2" fill="#f8dc7a" opacity="0.7"/>
+      <!-- Puntas -->
+      <circle cx="16.5" cy="36" r="1" fill="#d9a82f"/>
+      <circle cx="43.5" cy="36" r="1" fill="#d9a82f"/>
+      <!-- Tallo -->
+      <line x1="30" y1="24" x2="30" y2="21" stroke="#3d5c22" stroke-width="1"/>
+    </svg>
+    <span class="nav-logo-text">Serena <em>Bites</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#filosofia">Filosofía</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#experiencia">El método</a></li>
+    <li><a href="#visita" class="nav-cta">Reserva</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag"><span class="dot"></span> Real food · Mediterranean soul</div>
+      <h1>
+        Comida <em>real,</em><br>
+        cocinada con <span class="underline">cuidado.</span>
+      </h1>
+      <p class="hero-sub">Cocina mediterránea cuidada en formato bowl, poké, brunch y açaí. Producto de temporada, técnica honesta y sabor que nutre — el tipo de comida que apetece a diario.</p>
+      <div class="hero-ctas">
+        <a href="#carta" class="btn btn-primary">Descubre la carta <span class="btn-arrow">→</span></a>
+        <a href="carta-serena-bites.pdf" download class="btn btn-secondary">⤓ Carta en PDF</a>
+      </div>
+      <div class="hero-values">
+        <div class="value-item">
+          <div class="value-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L13.5 9H21L15 13L17 20L12 16L7 20L9 13L3 9H10.5L12 2Z" fill="currentColor"/></svg>
+          </div>
+          <div class="value-text">Cocina<br>de temporada</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="currentColor"/></svg>
+          </div>
+          <div class="value-text">Producto<br>de proximidad</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </div>
+          <div class="value-text">Sin azúcares<br>refinados</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Sello giratorio amarillo -->
+      <svg class="seal" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="circlePath" d="M 60 60 m -45 0 a 45 45 0 1 1 90 0 a 45 45 0 1 1 -90 0"/>
+        </defs>
+        <circle cx="60" cy="60" r="58" fill="#f4c84a"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#3d5c22" stroke-width="0.5"/>
+        <text fill="#3d5c22" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2">
+          <textPath href="#circlePath">REAL FOOD · DONE RIGHT · REAL FOOD · DONE RIGHT · </textPath>
+        </text>
+        <text x="60" y="56" text-anchor="middle" fill="#3d5c22" font-family="Fraunces, serif" font-size="13" font-style="italic" font-weight="500">eat</text>
+        <text x="60" y="72" text-anchor="middle" fill="#3d5c22" font-family="Fraunces, serif" font-size="13" font-style="italic" font-weight="500">real</text>
+      </svg>
+
+      <div class="photo photo-1">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowl mediterráneo con quinoa y verduras">
+      </div>
+      <div class="photo photo-2">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Tostada de aguacate con huevo">
+      </div>
+      <div class="photo photo-3">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Poké de salmón fresco">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Real food</div>
+    <div class="marquee-item">Mediterranean soul</div>
+    <div class="marquee-item">Producto de temporada</div>
+    <div class="marquee-item">Hecho cada día</div>
+    <div class="marquee-item">Sabor que nutre</div>
+    <div class="marquee-item">Eat real</div>
+    <div class="marquee-item">Real food</div>
+    <div class="marquee-item">Mediterranean soul</div>
+    <div class="marquee-item">Producto de temporada</div>
+    <div class="marquee-item">Hecho cada día</div>
+    <div class="marquee-item">Sabor que nutre</div>
+    <div class="marquee-item">Eat real</div>
+  </div>
+</div>
+
+<!-- ============ FILOSOFÍA ============ -->
+<section class="filosofia" id="filosofia">
+  <div class="section-eyebrow">Nuestra filosofía</div>
+  <h2>Cuando el producto es <em>bueno,</em> la cocina es <em>sencilla.</em></h2>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="currentColor"/></svg>
+      </div>
+      <h3>Producto que importa</h3>
+      <p>Verduras de temporada, proteínas de origen responsable, aceite de oliva virgen extra como base. Nos importa de dónde viene cada ingrediente — y se nota en el sabor.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Cocinado a diario</h3>
+      <p>Salsas hechas en casa, granolas tostadas en el horno, hummus batido cada mañana. Cocina honesta, sin atajos ni conservantes — como debería ser siempre.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L14 8H20L15 12L17 19L12 15L7 19L9 12L4 8H10L12 2Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Equilibrado y sabroso</h3>
+      <p>Cada plato pensado para alimentar bien y dejar buen sabor. Hidratos integrales, proteína cuidada, vegetales abundantes y salsas con personalidad — la fórmula mediterránea.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section class="menu" id="carta">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div>
+        <div class="section-eyebrow">La carta</div>
+        <h2>Cuatro mundos. <em>Un mismo cuidado.</em></h2>
+      </div>
+      <a href="carta-serena-bites.pdf" download class="btn btn-primary">
+        ⤓ Carta completa en PDF <span class="btn-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-cat="bowls">Pokés &amp; Bowls</button>
+      <button class="menu-tab" data-cat="wraps">Wraps &amp; Pitas</button>
+      <button class="menu-tab" data-cat="brunch">Brunch &amp; Tostadas</button>
+      <button class="menu-tab" data-cat="dulces">Yogur &amp; Açaí</button>
+    </div>
+
+    <!-- POKÉS & BOWLS (con builder) -->
+    <div class="menu-category active" data-cat="bowls">
+      <div class="category-intro">
+        <h3>Pokés &amp; <em>bowls</em> de temporada</h3>
+        <p>Cuatro recetas firma con su carácter, y la libertad de crear el tuyo a medida. Todos sobre arroz integral o quinoa, con aceite de oliva como base de cocina.</p>
+      </div>
+
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag signature">Signature</span>
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Poké Sakura">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Poké Sakura</div>
+            <div class="dish-price">13,50 €</div>
+          </div>
+          <p class="dish-desc">Salmón fresco marinado en soja-jengibre, arroz integral templado, edamame, pepino, aguacate, cebolla crujiente y mayonesa de wasabi suave.</p>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag signature">Signature</span>
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowl Mediterráneo">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Bowl Mediterráneo</div>
+            <div class="dish-price">11,90 €</div>
+          </div>
+          <p class="dish-desc">Quinoa, pollo al limón con hierbas, tomate cherry, hummus de cúrcuma, pepino, olivas Kalamata, feta y aceite de orégano.</p>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag veg">100% planta</span>
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Bowl Garden">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Bowl Garden</div>
+            <div class="dish-price">10,90 €</div>
+          </div>
+          <p class="dish-desc">Falafel recién horneado, quinoa, hummus, kale masajeado con limón, granada, zanahoria asada, semillas y tahini cítrico.</p>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag signature">Signature</span>
+            <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&q=80" alt="Poké Tropical">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Poké Tropical</div>
+            <div class="dish-price">12,90 €</div>
+          </div>
+          <p class="dish-desc">Atún rojo, arroz, mango maduro, edamame, pepino, aguacate, cebolla morada, sésamo tostado y salsa ponzu cítrica.</p>
+        </div>
+      </div>
+
+      <!-- BUILD YOUR OWN -->
+      <div class="builder">
+        <div class="builder-inner">
+          <div class="builder-header">
+            <div>
+              <h3>O créalo a tu <em>medida</em></h3>
+              <div class="builder-price">
+                <strong>11,90 €</strong>
+                <span>· bowl personalizado</span>
+              </div>
+            </div>
+            <p>Cuatro pasos. Tu combinación favorita en tu próximo bowl.</p>
+          </div>
+
+          <div class="builder-steps">
+            <div class="builder-step">
+              <div class="step-num">— Paso 01</div>
+              <div class="step-title">Elige base</div>
+              <ul class="step-options">
+                <li>Arroz integral</li>
+                <li>Quinoa</li>
+                <li>Mix verde (sin hidrato)</li>
+              </ul>
+            </div>
+
+            <div class="builder-step">
+              <div class="step-num">— Paso 02</div>
+              <div class="step-title">Tu proteína</div>
+              <ul class="step-options">
+                <li>Salmón marinado</li>
+                <li>Atún rojo</li>
+                <li>Pollo al limón</li>
+                <li>Falafel · veggie</li>
+                <li>Tofu marinado · veggie</li>
+              </ul>
+            </div>
+
+            <div class="builder-step">
+              <div class="step-num">— Paso 03</div>
+              <div class="step-title">Tres toppings</div>
+              <ul class="step-options">
+                <li>Aguacate · edamame</li>
+                <li>Mango · granada</li>
+                <li>Hummus · feta</li>
+                <li>Tomate · pepino</li>
+                <li>Olivas · cebolla</li>
+                <li>Zanahoria · semillas</li>
+              </ul>
+            </div>
+
+            <div class="builder-step">
+              <div class="step-num">— Paso 04</div>
+              <div class="step-title">Tu salsa</div>
+              <ul class="step-options">
+                <li>Ponzu cítrico</li>
+                <li>Tahini de limón</li>
+                <li>Wasabi suave</li>
+                <li>Aceite de orégano</li>
+                <li>Soja-jengibre</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRAPS & PITAS -->
+    <div class="menu-category" data-cat="wraps">
+      <div class="category-intro">
+        <h3>Wraps &amp; <em>pitas</em> mediterráneos</h3>
+        <p>El mismo cuidado, en formato de mano. Pan integral, masa madre, pita esponjosa — relleno generoso de proteína, vegetales y salsa hecha en casa.</p>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80" alt="Wrap Caesar">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Wrap Caesar</div>
+            <div class="dish-price">9,50 €</div>
+          </div>
+          <p class="dish-desc">Tortilla integral, pollo asado a la sal, romana fresca, parmesano de pasto, picatostes de pan de masa madre y César cremosa de la casa.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag veg">Vegetariano</span>
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Pita Halloumi">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Pita Halloumi</div>
+            <div class="dish-price">10,50 €</div>
+          </div>
+          <p class="dish-desc">Halloumi a la plancha, hummus de cúrcuma, hojas verdes, tomate maduro, pepino y tzatziki fresco con menta dentro de pita esponjosa.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=600&q=80" alt="Wrap Pollo Mediterráneo">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Wrap Mediterráneo</div>
+            <div class="dish-price">9,90 €</div>
+          </div>
+          <p class="dish-desc">Pollo al limón con hierbas, hummus, tomate cherry, pepino, feta, olivas Kalamata, espinaca baby y aceite de orégano.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80" alt="Wrap Salmón">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Wrap Salmón</div>
+            <div class="dish-price">11,50 €</div>
+          </div>
+          <p class="dish-desc">Salmón ahumado, queso fresco con cebollino, aguacate machacado en el plato, rúcula con pimienta, alcaparras y eneldo fresco.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRUNCH -->
+    <div class="menu-category" data-cat="brunch">
+      <div class="category-intro">
+        <h3>Brunch &amp; <em>tostadas</em> all day</h3>
+        <p>Pan de masa madre tostado al punto, ricotta batida del día, huevos camperos y aguacates en su mejor punto. Desayuno o merienda — la hora la pones tú.</p>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="Tostada Avocado">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Avocado Toast</div>
+            <div class="dish-price">8,90 €</div>
+          </div>
+          <p class="dish-desc">Pan de masa madre, aguacate machacado en el plato, huevo poché, ralladura de lima, escamas de chile suave y AOVE arbequino.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag veg">Vegetariano</span>
+            <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80" alt="Tostada Ricotta">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Ricotta &amp; Frutos rojos</div>
+            <div class="dish-price">8,50 €</div>
+          </div>
+          <p class="dish-desc">Ricotta fresca batida con un toque de miel cruda, frutos rojos de temporada, pistacho del Mediterráneo y ralladura de limón.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=600&q=80" alt="Quesadilla Verde">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Quesadilla Verde</div>
+            <div class="dish-price">9,90 €</div>
+          </div>
+          <p class="dish-desc">Tortilla de espinacas, pollo desmenuzado, queso curado de cabra, espinaca baby, salsa verde con cilantro fresco y lima exprimida.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600&q=80" alt="Tostada Salmón">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Smoked Salmon Toast</div>
+            <div class="dish-price">11,50 €</div>
+          </div>
+          <p class="dish-desc">Pan integral de centeno, salmón ahumado en finas capas, queso fresco con cebollino, aguacate, alcaparras y un toque de eneldo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- YOGUR & AÇAÍ -->
+    <div class="menu-category" data-cat="dulces">
+      <div class="category-intro">
+        <h3>Yogur &amp; <em>açaí</em> de la casa</h3>
+        <p>Yogures griegos artesanos, açaí cremoso, granola tostada en el horno cada mañana y la mejor fruta de temporada. Dulce honesto, sin azúcares añadidos.</p>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag sweet">De temporada</span>
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80" alt="Berry Bowl">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Berry Bowl</div>
+            <div class="dish-price">8,50 €</div>
+          </div>
+          <p class="dish-desc">Yogur griego artesano, granola de la casa con miel, fresas, arándanos y plátano. Un toque de miel cruda al final.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag sweet">Antioxidante</span>
+            <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=600&q=80" alt="Açaí Classic">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Açaí Classic</div>
+            <div class="dish-price">9,50 €</div>
+          </div>
+          <p class="dish-desc">Açaí amazónico cremoso, plátano, fresas frescas, granola, coco rallado, semillas de chía y un toque de miel cruda.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag sweet">Cremoso</span>
+            <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80" alt="Yogur Helado">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Frozen Yogurt &amp; Nutella</div>
+            <div class="dish-price">8,90 €</div>
+          </div>
+          <p class="dish-desc">Helado artesano de yogur griego, plátano, fresas, un drizzle de Nutella, almendras laminadas y galletas caseras de avena.</p>
+        </div>
+        <div class="dish-card">
+          <div class="dish-img">
+            <span class="dish-tag sweet">Tropical</span>
+            <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=600&q=80" alt="Açaí Tropical">
+          </div>
+          <div class="dish-head">
+            <div class="dish-name">Açaí Tropical</div>
+            <div class="dish-price">9,90 €</div>
+          </div>
+          <p class="dish-desc">Açaí, mango maduro, kiwi, piña, granola de coco, mantequilla de cacahuete artesana y mix de semillas de la casa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-download">
+      <p>Llévate la carta completa para verla con calma o compartirla.</p>
+      <a href="carta-serena-bites.pdf" download class="btn btn-primary">⤓ Carta en PDF <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCIA / EL MÉTODO ============ -->
+<section class="experience" id="experiencia">
+  <div class="exp-inner">
+    <div class="section-eyebrow">El método</div>
+    <h2>Comer <em>bien</em> es la nueva normalidad.</h2>
+    <p>Pensamos cada plato y cada decisión del local con un objetivo: que comer aquí sea una elección que te alimente — bien, en sabor y en cuerpo.</p>
+
+    <div class="exp-grid">
+      <div class="exp-feature">
+        <div class="exp-feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M5 9c0-4 3-7 7-7s7 3 7 7M5 15c0 4 3 7 7 7s7-3 7-7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div>
+          <h4>De temporada, siempre</h4>
+          <p>La carta cambia con el calendario. La huerta manda — primavera trae espárragos y guisantes, otoño trae calabaza y granada. Sabor en su mejor momento.</p>
+        </div>
+      </div>
+
+      <div class="exp-feature">
+        <div class="exp-feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div>
+          <h4>Personalízalo</h4>
+          <p>Build your own bowl: tu base, tu proteína, tres toppings y tu salsa. Y casi cualquier plato de la carta admite cambios para adaptarse a ti.</p>
+        </div>
+      </div>
+
+      <div class="exp-feature">
+        <div class="exp-feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div>
+          <h4>Para todos los planes</h4>
+          <p>Sin gluten, vegetariano, vegano, keto. Más del 60% de la carta tiene su versión adaptada — y te ayudamos a elegir la que mejor te encaje.</p>
+        </div>
+      </div>
+
+      <div class="exp-feature">
+        <div class="exp-feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div>
+          <h4>Ingrediente con origen</h4>
+          <p>Trabajamos con productores locales y de proximidad. Pescado de lonja, vegetales del huerto, aceites de denominación. Cada producto, su historia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISITA ============ -->
+<section class="visit" id="visita">
+  <div class="visit-inner">
+    <div class="section-eyebrow">Visítanos</div>
+    <h2>Una mesa esperándote, <em>cuando quieras</em>.</h2>
+    <p>Quédate a comer con calma, recógelo en barra o pídelo a casa. Nosotros nos encargamos del resto — tú elige cómo te apetece más hoy.</p>
+
+    <div class="visit-info">
+      <div class="info-block">
+        <h4>Horario</h4>
+        <p>Lun — Vie · 09:00 — 22:00<br>Sáb — Dom · 10:00 — 23:00</p>
+      </div>
+      <div class="info-block">
+        <h4>Reservas</h4>
+        <p>+34 000 000 000<br>hola@serenabites.com</p>
+      </div>
+      <div class="info-block">
+        <h4>Dirección</h4>
+        <p>Por anunciar<br>Próxima apertura</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 15 27 Q 19 17 29 21 Q 25 30 15 27 Z" fill="#7ba64c"/>
+      <path d="M 45 27 Q 41 17 31 21 Q 35 30 45 27 Z" fill="#a8c882"/>
+      <ellipse cx="30" cy="36" rx="14" ry="12" fill="#f4c84a"/>
+      <ellipse cx="26" cy="33" rx="3" ry="2" fill="#f8dc7a" opacity="0.7"/>
+      <line x1="30" y1="24" x2="30" y2="21" stroke="#7ba64c" stroke-width="1"/>
+    </svg>
+    <span class="nav-logo-text" style="color: var(--cream);">Serena <em>Bites</em></span>
+  </a>
+  <div class="footer-tag">Real food. Mediterranean soul.</div>
+  <div class="footer-bottom">© 2026 Serena Bites · Cocina mediterránea cuidada</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  const tabs = document.querySelectorAll('.menu-tab');
+  const cats = document.querySelectorAll('.menu-category');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      const cat = t.dataset.cat;
+      tabs.forEach(x => x.classList.remove('active'));
+      cats.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.querySelector(`.menu-category[data-cat="${cat}"]`).classList.add('active');
+    });
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar, .dish-card, .exp-feature, .info-block, .builder').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.7s ease ${i * 0.04}s, transform 0.7s ease ${i * 0.04}s`;
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
