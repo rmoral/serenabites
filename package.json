@@ -5,7 +5,16 @@
   "type": "module",
   "description": "Serena Bites — site + delivery funnel + Stripe Checkout",
   "engines": { "node": ">=18" },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
   "dependencies": {
+    "express": "^4.21.0",
     "stripe": "^17.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
   }
 }

@@ -1,0 +1,48 @@
+# Unit systemd para el backend de Serena Bites.
+# ───────────────────────────────────────────────────────────────
+# Instalación:
+#   sudo cp deploy/serenabites.service /etc/systemd/system/serenabites.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now serenabites
+#
+# Estado / logs:
+#   sudo systemctl status serenabites
+#   sudo journalctl -u serenabites -f
+#
+# Reiniciar tras un deploy:
+#   sudo systemctl restart serenabites
+# ───────────────────────────────────────────────────────────────
+
+[Unit]
+Description=Serena Bites — Stripe + WhatsApp backend
+Documentation=https://github.com/rmoral/serenabites
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/serenabites
+EnvironmentFile=/var/www/serenabites/.env
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOST=127.0.0.1
+ExecStart=/usr/bin/node /var/www/serenabites/server.js
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+# Hardening básico
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/serenabites
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,10 +1,15 @@
 /*
  * POST /api/stripe-webhook
  * ---------------------------------------------------------------
- * Recibe eventos de Stripe (configura el endpoint en Stripe Dashboard
- * → Developers → Webhooks). Cuando llega un `checkout.session.completed`
- * verifica la firma, consulta los line items y envía el resumen al
- * WhatsApp del restaurante usando Twilio.
+ * Handler Express. Recibe eventos de Stripe (configura el endpoint
+ * en Stripe Dashboard → Developers → Webhooks). Cuando llega un
+ * `checkout.session.completed` verifica la firma sobre el body crudo,
+ * consulta los line items y envía el resumen al WhatsApp del
+ * restaurante usando Twilio.
+ *
+ * Este handler espera que el body sea un Buffer (Express debe estar
+ * configurado con `express.raw({ type: 'application/json' })` para
+ * esta ruta — ver server.js).
  *
  * Variables de entorno requeridas:
  *   STRIPE_SECRET_KEY        — sk_test_... o sk_live_...
@@ -21,17 +26,6 @@
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// Vercel: necesitamos el body crudo para verificar la firma de Stripe.
-export const config = {
-  api: { bodyParser: false },
-};
-
-async function readRawBody(req) {
-  const chunks = [];
-  for await (const chunk of req) chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-  return Buffer.concat(chunks);
-}
 
 async function sendWhatsApp(message) {
   const sid   = process.env.TWILIO_ACCOUNT_SID;
@@ -65,19 +59,14 @@ function eur(cents) {
   return (cents / 100).toFixed(2).replace('.', ',') + ' €';
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).end('Method Not Allowed');
-  }
-
+export default async function stripeWebhook(req, res) {
   const sig    = req.headers['stripe-signature'];
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event;
   try {
-    const raw = await readRawBody(req);
-    event = stripe.webhooks.constructEvent(raw, sig, secret);
+    // req.body es un Buffer porque montamos express.raw() para esta ruta
+    event = stripe.webhooks.constructEvent(req.body, sig, secret);
   } catch (err) {
     console.error('[stripe-webhook] firma inválida:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -121,9 +110,11 @@ export default async function handler(req, res) {
     await sendWhatsApp(text);
   } catch (err) {
     console.error('[stripe-webhook] error procesando pedido:', err);
-    // Devolvemos 500 para que Stripe reintente (es idempotente).
+    // 500 → Stripe reintentará. El procesado es idempotente porque
+    // dedupa por session.id.
     return res.status(500).json({ error: err.message });
   }
 
   return res.status(200).json({ received: true });
 }
+

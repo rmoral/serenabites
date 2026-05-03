@@ -1,14 +1,13 @@
 /*
  * POST /api/create-checkout-session
  * ---------------------------------------------------------------
- * Recibe el carrito del cliente, recalcula precios en servidor (nunca
- * se confía en lo que envía el navegador), crea una Stripe Checkout
- * Session y devuelve la URL a la que redirigir al usuario.
+ * Handler Express. Recibe el carrito del cliente, recalcula precios
+ * en servidor (nunca se confía en lo que envía el navegador), crea
+ * una Stripe Checkout Session y devuelve la URL a la que redirigir
+ * al usuario.
  *
  * Variables de entorno requeridas:
  *   STRIPE_SECRET_KEY    — sk_test_... o sk_live_...
- *
- * Compatible con Vercel (default) y Netlify Functions (con un wrapper).
  */
 
 import Stripe from 'stripe';
@@ -43,12 +42,7 @@ const FREE_DELIVERY_FROM= 2500;  // 25,00 €
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
-
+export default async function createCheckoutSession(req, res) {
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const { items, mode, customer } = body;
@@ -99,7 +93,12 @@ export default async function handler(req, res) {
       }
     }
 
-    const origin = req.headers.origin || `https://${req.headers.host}`;
+    // En el flujo normal el navegador envía Origin. Como fallback (p.ej.
+    // si se llama desde herramientas), reconstruimos la URL respetando
+    // X-Forwarded-Proto y X-Forwarded-Host de Apache.
+    const proto = req.headers['x-forwarded-proto'] || 'https';
+    const host  = req.headers['x-forwarded-host'] || req.headers.host;
+    const origin = req.headers.origin || `${proto}://${host}`;
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
