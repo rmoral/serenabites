@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Serena Bites">
+  <title>E · El mordisco — punto cortado</title>
+  
+  <path d="M 100 12&#xA;           A 88 88 0 1 1 64 188&#xA;           A 22 22 0 0 0 64 144&#xA;           A 22 22 0 0 0 100 100&#xA;           A 22 22 0 0 0 144 64&#xA;           A 22 22 0 0 0 100 12 Z" fill="#b0481f"></path>
+  
+  <text x="100" y="92" text-anchor="middle" font-family="&#39;Fraunces&#39;, serif" font-style="italic" font-weight="400" font-size="32" fill="#f4ecd8">Serena</text>
+  <text x="100" y="128" text-anchor="middle" font-family="&#39;Fraunces&#39;, serif" font-style="italic" font-weight="500" font-size="38" fill="#efb73a">Bites.</text>
+  
+  <line x1="78" y1="102" x2="122" y2="102" stroke="#efb73a" stroke-width="1" opacity="0.5"></line>
+</svg>

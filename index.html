@@ -3,27 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Serena Bites · Real food, Mediterranean soul</title>
+<title>Serena Bites — Real food, Mediterranean soul</title>
 <meta name="description" content="Serena Bites — Cocina mediterránea cuidada. Bowls, pokés, brunch y açaí elaborados con producto de temporada y técnica honesta.">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="apple-touch-icon" href="brand/logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Bricolage+Grotesque:opsz,wght@10..48,300;10..48,400;10..48,500;10..48,600;10..48,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #fbf7ee;
-    --cream-deep: #f3ecd9;
-    --paper: #fefcf7;
-    --lemon: #f4c84a;
-    --lemon-deep: #d9a82f;
-    --lemon-soft: #f8dc7a;
-    --olive: #5b7f3a;
-    --olive-deep: #3d5c22;
+    --cream:      #f4ecd8;
+    --cream-deep: #ebe0c4;
+    --paper:      #faf4e3;
+    --ink:        #1d2a14;
+    --ink-soft:   #4f5a3d;
+    --line:       rgba(29, 42, 20, 0.16);
+    --lemon:      #efb73a;
+    --lemon-deep: #c8901c;
+    --lemon-soft: #f6d77a;
+    --olive:      #4f7232;
+    --olive-deep: #2d4717;
     --olive-soft: #7ba64c;
-    --terra: #c25a2c;
-    --terra-deep: #9a4520;
-    --ink: #2a3a1f;
-    --ink-soft: #5a6048;
-    --line: rgba(42, 58, 31, 0.12);
+    --terra:      #b0481f;
+    --terra-deep: #823217;
+    --plum:       #5a2a3e;
+
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans:  "Bricolage Grotesque", "Helvetica Neue", system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,603 +39,605 @@
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--sans);
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.55;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
+  /* Grain overlay para textura */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
+
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; }
+  em { font-style: italic; }
+
+  /* ============ MONOGRAM LOGO ============ */
+  .mono-logo { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: inherit; }
+  .mono-mark {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--olive-deep);
+    color: var(--lemon);
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .mono-mark::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    opacity: 0.35;
+  }
+  .mono-mark span { transform: translate(0, 1px); letter-spacing: -0.05em; }
+  .mono-wordmark {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  .mono-wordmark em { color: var(--terra); font-weight: 400; }
 
   /* ============ NAV ============ */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 1.2rem 2.5rem;
+    padding: 1.1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: background .35s ease, padding .35s ease, box-shadow .35s ease;
   }
-
   nav.scrolled {
-    background: rgba(251, 247, 238, 0.95);
+    background: color-mix(in srgb, var(--cream) 92%, transparent);
     backdrop-filter: blur(14px);
-    padding: 0.8rem 2.5rem;
+    padding: 0.7rem 2rem;
     box-shadow: 0 1px 0 var(--line);
   }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  .nav-logo svg { width: 42px; height: 42px; }
-
-  .nav-logo-text {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-
-  .nav-logo-text em {
-    font-style: italic;
-    color: var(--terra);
-    font-weight: 400;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.2rem;
-    list-style: none;
-    align-items: center;
-  }
-
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
   .nav-links a {
     color: var(--ink);
     text-decoration: none;
     font-size: 0.92rem;
     font-weight: 500;
-    transition: color 0.2s;
+    position: relative;
+    transition: color .2s;
   }
-
-  .nav-links a:hover { color: var(--olive); }
-
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 1px;
+    background: var(--terra);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
   .nav-cta {
-    background: var(--olive-deep);
+    background: var(--ink);
     color: var(--cream) !important;
-    padding: 0.6rem 1.3rem;
-    border-radius: 99px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
     font-size: 0.85rem !important;
-    font-weight: 500 !important;
-    transition: background 0.2s !important;
+    transition: background .2s;
   }
-
-  .nav-cta:hover { background: var(--olive) !important; color: var(--cream) !important; }
+  .nav-cta::after { display: none; }
+  .nav-cta:hover { background: var(--olive-deep); color: var(--cream) !important; }
 
   /* ============ HERO ============ */
   .hero {
     min-height: 100vh;
-    padding: 7rem 2.5rem 3rem;
+    padding: 7rem 2rem 4rem;
     position: relative;
     overflow: hidden;
   }
-
-  /* Fondo orgánico amarillo limón */
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -8%; right: -12%;
-    width: 720px; height: 720px;
-    background: radial-gradient(circle, var(--lemon-soft) 0%, transparent 60%);
-    opacity: 0.55;
-    z-index: 0;
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
   }
-
-  .hero::after {
-    content: '';
+  .hero-bg .blob {
     position: absolute;
-    bottom: -25%; left: -12%;
-    width: 620px; height: 620px;
-    background: radial-gradient(circle, var(--olive-soft) 0%, transparent 60%);
-    opacity: 0.28;
-    z-index: 0;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.45;
   }
+  .hero-bg .blob-1 { top: -10%; right: -8%; width: 560px; height: 560px; background: var(--lemon-soft); }
+  .hero-bg .blob-2 { bottom: -20%; left: -10%; width: 480px; height: 480px; background: var(--olive-soft); opacity: 0.3; }
 
   .hero-grid {
-    max-width: 1300px;
+    max-width: 1320px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
     align-items: center;
     position: relative;
     z-index: 1;
   }
 
-  .hero-content { animation: fadeUp 1s ease-out; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-tag {
-    display: inline-flex;
+  .hero-meta {
+    display: flex;
     align-items: center;
-    gap: 0.6rem;
-    background: var(--cream-deep);
-    color: var(--olive-deep);
-    padding: 0.5rem 1.1rem;
-    border-radius: 99px;
-    font-size: 0.82rem;
-    font-weight: 500;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
     margin-bottom: 1.8rem;
+    animation: fadeUp .9s ease-out;
   }
-
-  .hero-tag .dot {
+  .hero-meta .line { flex: 0 0 30px; height: 1px; background: var(--ink-soft); opacity: 0.5; }
+  .hero-meta .dot {
     width: 7px; height: 7px;
-    background: var(--lemon-deep);
+    background: var(--terra);
     border-radius: 50%;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--terra) 25%, transparent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--terra) 25%, transparent); }
+    50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--terra) 0%, transparent); }
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 7vw, 6rem);
-    line-height: 0.96;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: var(--ink);
+    font-size: clamp(3.4rem, 8.5vw, 8rem);
+    line-height: 0.92;
+    font-weight: 300;
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.04em;
+    animation: fadeUp 1s ease-out .1s both;
   }
-
-  .hero h1 em {
+  .hero h1 .it { font-style: italic; font-weight: 400; color: var(--terra); }
+  .hero h1 .ul {
+    position: relative; display: inline-block;
     font-style: italic;
-    color: var(--terra);
     font-weight: 400;
   }
-
-  .hero h1 .underline {
-    position: relative;
-    display: inline-block;
-  }
-
-  .hero h1 .underline::after {
-    content: '';
+  .hero h1 .ul::after {
+    content: "";
     position: absolute;
-    bottom: 0.05em;
-    left: -0.05em;
-    right: -0.05em;
-    height: 0.18em;
+    left: -0.04em; right: -0.04em;
+    bottom: 0.08em;
+    height: 0.22em;
     background: var(--lemon);
     z-index: -1;
-    border-radius: 4px;
+    border-radius: 3px;
+    transform: skew(-2deg);
+  }
+  .hero h1 .amp {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--olive-deep);
+    display: inline-block;
+    transform: translateY(0.08em) rotate(-4deg);
+    margin: 0 0.05em;
   }
 
   .hero-sub {
-    font-size: 1.2rem;
+    font-size: 1.18rem;
     color: var(--ink-soft);
-    margin-bottom: 2.5rem;
-    max-width: 42ch;
+    margin-bottom: 2.8rem;
+    max-width: 44ch;
     line-height: 1.55;
+    animation: fadeUp 1s ease-out .25s both;
   }
 
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  .hero-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; animation: fadeUp 1s ease-out .35s both; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.95rem 1.8rem;
-    border-radius: 99px;
+    gap: 0.7rem;
+    padding: 0.95rem 1.7rem;
+    border-radius: 999px;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-    border: 2px solid transparent;
+    font-size: 0.92rem;
+    transition: all .25s ease;
+    border: 1.5px solid transparent;
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--sans);
   }
-
-  .btn-primary {
-    background: var(--olive-deep);
-    color: var(--cream);
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--olive-deep); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-secondary:hover { background: var(--ink); color: var(--cream); }
+  .btn-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px;
+    transition: transform .25s;
   }
-
-  .btn-primary:hover {
-    background: var(--olive);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-
-  .btn-secondary:hover {
-    background: var(--ink);
-    color: var(--cream);
-  }
-
-  .btn-arrow { transition: transform 0.25s; }
   .btn:hover .btn-arrow { transform: translateX(4px); }
 
-  /* Hero stats */
+  /* Hero values */
   .hero-values {
     display: flex;
-    gap: 2.5rem;
-    margin-top: 3.5rem;
+    gap: 0;
+    margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid var(--line);
     flex-wrap: wrap;
+    animation: fadeUp 1s ease-out .5s both;
   }
-
   .value-item {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
+    flex: 1; min-width: 160px;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 0.4rem;
   }
-
-  .value-icon {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--lemon);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--olive-deep);
-    flex-shrink: 0;
+  .value-item:last-child { border-right: none; padding-right: 0; padding-left: 1.5rem; }
+  .value-item:first-child { padding-left: 0; }
+  .value-item:not(:first-child):not(:last-child) { padding-left: 1.5rem; }
+  .value-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--terra);
+    letter-spacing: 0.15em;
   }
-
   .value-text {
-    font-family: 'Fraunces', serif;
-    font-size: 1rem;
-    color: var(--ink);
-    line-height: 1.2;
+    font-family: var(--serif);
+    font-size: 1.05rem;
     font-style: italic;
+    color: var(--ink);
+    line-height: 1.25;
   }
 
-  /* Hero visual - collage */
+  /* Hero visual */
   .hero-visual {
     position: relative;
-    height: 600px;
-    animation: fadeIn 1.4s ease-out 0.2s both;
+    height: 620px;
+    animation: fadeIn 1.4s ease-out .2s both;
   }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
   .hero-visual .photo {
     position: absolute;
-    border-radius: 24px;
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -15px rgba(42, 58, 31, 0.22);
+    box-shadow: 0 30px 60px -25px rgba(29, 42, 20, 0.35);
   }
+  .hero-visual .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-1 { top: 2%; left: 3%; width: 58%; height: 58%; transform: rotate(-3deg); animation: float1 8s ease-in-out infinite; }
+  .photo-2 { top: 14%; right: 0; width: 46%; height: 42%; transform: rotate(4deg); animation: float2 9s ease-in-out infinite; }
+  .photo-3 { bottom: 2%; left: 18%; width: 60%; height: 40%; transform: rotate(2deg); animation: float1 10s ease-in-out infinite reverse; }
 
-  .hero-visual .photo img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  @keyframes float1 { 0%,100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(-3deg) translateY(-14px); } }
+  @keyframes float2 { 0%,100% { transform: rotate(4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-10px); } }
 
-  .photo-1 {
-    top: 0; left: 5%;
-    width: 56%; height: 54%;
-    transform: rotate(-3deg);
-    animation: float1 7s ease-in-out infinite;
-  }
-
-  .photo-2 {
-    top: 18%; right: 0;
-    width: 48%; height: 44%;
-    transform: rotate(4deg);
-    animation: float2 8s ease-in-out infinite;
-  }
-
-  .photo-3 {
-    bottom: 0; left: 14%;
-    width: 60%; height: 42%;
-    transform: rotate(2deg);
-    animation: float1 9s ease-in-out infinite reverse;
-  }
-
-  @keyframes float1 {
-    0%, 100% { transform: rotate(-3deg) translateY(0); }
-    50% { transform: rotate(-3deg) translateY(-12px); }
-  }
-
-  @keyframes float2 {
-    0%, 100% { transform: rotate(4deg) translateY(0); }
-    50% { transform: rotate(4deg) translateY(-10px); }
-  }
-
-  /* Sello flotante */
   .seal {
     position: absolute;
     top: 4%;
-    right: 6%;
-    width: 115px;
-    height: 115px;
+    right: 8%;
+    width: 130px; height: 130px;
     z-index: 3;
-    animation: rotate 22s linear infinite;
+    animation: rotate 28s linear infinite;
   }
+  @keyframes rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
-  @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  /* Vertical caption next to image */
+  .vert-caption {
+    position: absolute;
+    bottom: 12%;
+    right: -8px;
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .vert-caption::before {
+    content: "";
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--ink-soft);
+    vertical-align: middle;
+    margin-right: 0.8rem;
+    opacity: 0.6;
   }
 
   /* ============ MARQUEE ============ */
   .marquee {
-    background: var(--olive-deep);
+    background: var(--ink);
     color: var(--cream);
-    padding: 1.3rem 0;
+    padding: 1.4rem 0;
     overflow: hidden;
-    border-top: 3px solid var(--lemon);
-    border-bottom: 3px solid var(--lemon);
+    border-top: 2px solid var(--lemon);
+    border-bottom: 2px solid var(--lemon);
+    position: relative;
   }
-
   .marquee-track {
     display: flex;
     gap: 3rem;
-    animation: scroll 38s linear infinite;
+    animation: scroll 42s linear infinite;
     white-space: nowrap;
     width: max-content;
   }
-
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .marquee-item {
-    font-family: 'Fraunces', serif;
-    font-size: 1.45rem;
+    font-family: var(--serif);
+    font-size: 1.55rem;
     font-style: italic;
+    font-weight: 300;
     display: flex;
     align-items: center;
     gap: 3rem;
   }
-
-  .marquee-item::after {
-    content: '✦';
-    color: var(--lemon);
-    font-size: 1.1rem;
-    font-style: normal;
-  }
+  .marquee-item .star { color: var(--lemon); font-style: normal; font-size: 1.2rem; }
 
   /* ============ FILOSOFÍA ============ */
   .filosofia {
-    padding: 8rem 2.5rem;
-    max-width: 1300px;
+    padding: 8rem 2rem 6rem;
+    max-width: 1320px;
     margin: 0 auto;
+    position: relative;
   }
-
-  .section-eyebrow {
+  .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--olive);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--terra);
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     margin-bottom: 1.2rem;
   }
-
-  .section-eyebrow::before {
-    content: '';
-    width: 24px;
-    height: 2px;
-    background: var(--lemon-deep);
+  .eyebrow::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--terra);
   }
-
-  .filosofia h2 {
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
-    line-height: 1.05;
+  .filosofia-head {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 4rem;
+    align-items: end;
     margin-bottom: 5rem;
-    max-width: 24ch;
   }
-
-  .filosofia h2 em { font-style: italic; color: var(--olive-deep); }
+  .filosofia h2 {
+    font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+    line-height: 1.02;
+    max-width: 16ch;
+    font-weight: 300;
+  }
+  .filosofia h2 em { color: var(--olive-deep); font-weight: 400; }
+  .filosofia-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    border-left: 2px solid var(--lemon);
+    padding-left: 1.2rem;
+    max-width: 38ch;
+  }
+  .filosofia-quote span { display: block; margin-top: 0.6rem; font-style: normal; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra); }
 
   .pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
   }
-
   .pillar {
     background: var(--paper);
-    padding: 2.5rem 2rem;
-    border-radius: 24px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 2.2rem 1.8rem 2rem;
+    border-radius: 18px;
     border: 1px solid var(--line);
+    position: relative;
+    transition: transform .35s ease, box-shadow .35s ease;
+    overflow: hidden;
   }
-
-  .pillar:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px -20px rgba(42, 58, 31, 0.18);
+  .pillar:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -28px rgba(29, 42, 20, 0.28); }
+  .pillar-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--cream-deep);
+    position: absolute;
+    top: 0.8rem; right: 1.2rem;
+    pointer-events: none;
   }
-
-  .pillar-icon {
-    width: 56px; height: 56px;
-    border-radius: 16px;
-    background: var(--lemon);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: var(--olive-deep);
+  .pillar-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--terra);
+    margin-bottom: 1rem;
   }
-
-  .pillar:nth-child(2) .pillar-icon { background: var(--olive-soft); color: var(--cream); }
-  .pillar:nth-child(3) .pillar-icon { background: var(--terra); color: var(--cream); }
-
   .pillar h3 {
-    font-size: 1.55rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.1;
+    font-weight: 400;
+    max-width: 14ch;
   }
-
+  .pillar h3 em { color: var(--olive-deep); }
   .pillar p {
     color: var(--ink-soft);
-    line-height: 1.65;
-    font-size: 0.97rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
   }
+  .pillar:nth-child(2) { background: var(--olive-deep); color: var(--cream); border-color: var(--olive-deep); }
+  .pillar:nth-child(2) .pillar-num { color: rgba(244, 236, 216, 0.12); }
+  .pillar:nth-child(2) .pillar-tag { color: var(--lemon); }
+  .pillar:nth-child(2) h3 em { color: var(--lemon); }
+  .pillar:nth-child(2) p { color: rgba(244, 236, 216, 0.78); }
 
   /* ============ CARTA ============ */
   .menu {
     background: var(--paper);
-    padding: 8rem 2.5rem;
+    padding: 7rem 2rem 8rem;
     border-radius: 60px 60px 0 0;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    position: relative;
   }
-
-  .menu-inner {
-    max-width: 1300px;
-    margin: 0 auto;
-  }
+  .menu-inner { max-width: 1320px; margin: 0 auto; }
 
   .menu-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: end;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
     gap: 2rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
   }
-
   .menu-header h2 {
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    line-height: 1;
-    max-width: 18ch;
+    font-size: clamp(2.8rem, 5.6vw, 5rem);
+    line-height: 0.96;
+    max-width: 14ch;
+    font-weight: 300;
   }
-
-  .menu-header h2 em { font-style: italic; color: var(--olive-deep); }
+  .menu-header h2 em { color: var(--terra); font-weight: 400; }
+  .menu-header h2 .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lemon-deep);
+    font-size: 0.7em;
+    vertical-align: super;
+  }
 
   .menu-tabs {
     display: flex;
-    gap: 0.6rem;
+    gap: 0.5rem;
     margin-bottom: 3rem;
     flex-wrap: wrap;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--line);
   }
-
   .menu-tab {
-    padding: 0.7rem 1.4rem;
+    padding: 0.7rem 1.3rem;
     background: transparent;
-    border: 2px solid var(--line);
-    border-radius: 99px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--ink);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-
-  .menu-tab:hover { border-color: var(--olive); }
-
+  .menu-tab .tab-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--terra);
+    letter-spacing: 0.05em;
+    transition: color .25s;
+  }
+  .menu-tab:hover { border-color: var(--ink); }
   .menu-tab.active {
-    background: var(--olive-deep);
+    background: var(--ink);
     color: var(--cream);
-    border-color: var(--olive-deep);
+    border-color: var(--ink);
   }
+  .menu-tab.active .tab-num { color: var(--lemon); }
 
-  .menu-category {
-    display: none;
-    animation: fadeIn 0.5s ease;
-  }
-
+  .menu-category { display: none; animation: fadeIn .6s ease; }
   .menu-category.active { display: block; }
 
   .category-intro {
     margin-bottom: 3rem;
-    max-width: 60ch;
+    max-width: 64ch;
   }
-
   .category-intro h3 {
     font-size: 2.2rem;
     margin-bottom: 0.6rem;
+    font-weight: 300;
   }
-
-  .category-intro h3 em { font-style: italic; color: var(--olive-deep); }
-
-  .category-intro p {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-  }
+  .category-intro h3 em { color: var(--olive-deep); font-weight: 400; }
+  .category-intro p { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.6; }
 
   .dishes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
   }
-
   .dish-card {
     background: var(--cream);
-    border-radius: 20px;
-    padding: 1.5rem;
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 18px;
+    padding: 1.2rem 1.2rem 1.4rem;
+    transition: transform .35s, box-shadow .35s;
     border: 1px solid var(--line);
+    position: relative;
   }
-
   .dish-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 32px -16px rgba(42, 58, 31, 0.16);
+    box-shadow: 0 18px 36px -18px rgba(29, 42, 20, 0.2);
   }
-
   .dish-img {
     width: 100%;
     aspect-ratio: 4/3;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.1rem;
     background: var(--cream-deep);
     position: relative;
   }
-
   .dish-img img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s;
+    transition: transform .6s ease;
   }
-
-  .dish-card:hover .dish-img img { transform: scale(1.06); }
-
+  .dish-card:hover .dish-img img { transform: scale(1.05); }
   .dish-tag {
     position: absolute;
-    top: 0.7rem;
-    left: 0.7rem;
+    top: 0.7rem; left: 0.7rem;
     background: var(--cream);
     color: var(--olive-deep);
-    padding: 0.3rem 0.75rem;
-    border-radius: 99px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.12em;
   }
-
   .dish-tag.veg { background: var(--olive-soft); color: var(--cream); }
-  .dish-tag.signature { background: var(--lemon); color: var(--olive-deep); }
+  .dish-tag.signature { background: var(--ink); color: var(--lemon); }
   .dish-tag.sweet { background: var(--terra); color: var(--cream); }
 
+  .dish-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--terra);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
   .dish-head {
     display: flex;
     justify-content: space-between;
@@ -636,146 +645,134 @@
     gap: 1rem;
     margin-bottom: 0.5rem;
   }
-
   .dish-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-family: var(--serif);
+    font-size: 1.32rem;
+    font-weight: 400;
     color: var(--ink);
+    line-height: 1.1;
   }
-
   .dish-price {
-    font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--olive-deep);
     white-space: nowrap;
+    font-feature-settings: "tnum";
   }
+  .dish-desc { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.55; }
 
-  .dish-desc {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    line-height: 1.55;
-  }
-
-  /* ============ BUILD YOUR OWN ============ */
+  /* ============ BUILDER ============ */
   .builder {
     margin-top: 4rem;
-    padding: 3rem;
-    background: var(--olive-deep);
+    padding: 3rem 2.5rem;
+    background: var(--ink);
     color: var(--cream);
-    border-radius: 28px;
+    border-radius: 24px;
     position: relative;
     overflow: hidden;
   }
-
   .builder::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: -50%; right: -10%;
-    width: 400px; height: 400px;
+    top: -40%; right: -8%;
+    width: 380px; height: 380px;
     background: radial-gradient(circle, var(--lemon) 0%, transparent 65%);
-    opacity: 0.15;
-    z-index: 0;
+    opacity: 0.18;
   }
-
+  .builder::after {
+    content: "BUILD · YOUR · OWN ·";
+    position: absolute;
+    top: 1.2rem;
+    right: -2rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(244, 236, 216, 0.18);
+    transform: rotate(90deg);
+    transform-origin: top right;
+    pointer-events: none;
+  }
   .builder-inner { position: relative; z-index: 1; }
-
   .builder-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: end;
+    gap: 2rem;
     margin-bottom: 2.5rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(251, 247, 238, 0.18);
+    border-bottom: 1px solid rgba(244, 236, 216, 0.16);
   }
-
   .builder-header h3 {
-    font-size: 2.2rem;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
     color: var(--cream);
-    line-height: 1.1;
+    line-height: 1;
+    font-weight: 300;
   }
-
-  .builder-header h3 em { font-style: italic; color: var(--lemon); }
-
-  .builder-header p {
-    color: rgba(251, 247, 238, 0.7);
-    font-size: 0.95rem;
-    max-width: 30ch;
+  .builder-header h3 em { color: var(--lemon); font-weight: 400; }
+  .builder-side { display: flex; flex-direction: column; gap: 1rem; align-items: flex-end; }
+  .builder-side p {
+    color: rgba(244, 236, 216, 0.7);
+    font-size: 0.92rem;
+    max-width: 28ch;
     text-align: right;
   }
-
   .builder-price {
     display: inline-flex;
     align-items: baseline;
     gap: 0.4rem;
     background: var(--lemon);
-    color: var(--olive-deep);
-    padding: 0.5rem 1.1rem;
-    border-radius: 99px;
-    font-family: 'Fraunces', serif;
-    margin-top: 0.5rem;
+    color: var(--ink);
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-family: var(--serif);
   }
-
-  .builder-price strong {
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
+  .builder-price strong { font-size: 1.4rem; font-weight: 600; }
   .builder-price span {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.12em;
+    font-family: var(--mono);
   }
 
   .builder-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
-
   .builder-step {
-    background: rgba(251, 247, 238, 0.06);
-    border: 1px solid rgba(251, 247, 238, 0.12);
-    border-radius: 16px;
-    padding: 1.5rem;
+    background: rgba(244, 236, 216, 0.05);
+    border: 1px solid rgba(244, 236, 216, 0.14);
+    border-radius: 14px;
+    padding: 1.4rem 1.2rem;
+    transition: background .25s;
   }
-
+  .builder-step:hover { background: rgba(244, 236, 216, 0.08); }
   .step-num {
-    font-family: 'Fraunces', serif;
-    font-size: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
     color: var(--lemon);
-    font-style: italic;
-    margin-bottom: 0.6rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
   }
-
   .step-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 0.8rem;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0.9rem;
     color: var(--cream);
   }
-
   .step-options {
     list-style: none;
-    color: rgba(251, 247, 238, 0.78);
+    color: rgba(244, 236, 216, 0.78);
     font-size: 0.88rem;
     line-height: 1.7;
   }
-
-  .step-options li {
-    padding: 0.15rem 0;
-  }
-
   .step-options li::before {
-    content: '— ';
+    content: "—";
     color: var(--lemon);
-    margin-right: 0.3rem;
+    margin-right: 0.45rem;
   }
 
   .menu-download {
@@ -784,199 +781,272 @@
     padding-top: 3rem;
     border-top: 1px solid var(--line);
   }
-
-  .menu-download p {
-    color: var(--ink-soft);
-    margin-bottom: 1.5rem;
-  }
+  .menu-download p { color: var(--ink-soft); margin-bottom: 1.5rem; }
 
   /* ============ EXPERIENCIA ============ */
   .experience {
-    padding: 8rem 2.5rem;
+    padding: 8rem 2rem;
     background: var(--cream);
+    position: relative;
   }
-
-  .exp-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
+  .exp-inner { max-width: 1180px; margin: 0 auto; }
   .experience h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    line-height: 1.02;
+    margin-bottom: 1.4rem;
     max-width: 22ch;
+    font-weight: 300;
   }
-
-  .experience h2 em {
-    font-style: italic;
-    color: var(--terra);
-  }
-
+  .experience h2 em { font-style: italic; color: var(--terra); font-weight: 400; }
   .experience > .exp-inner > p {
-    font-size: 1.2rem;
+    font-size: 1.18rem;
     color: var(--ink-soft);
-    max-width: 60ch;
+    max-width: 58ch;
     margin-bottom: 4rem;
-    line-height: 1.6;
+    line-height: 1.55;
   }
-
   .exp-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
   }
-
   .exp-feature {
-    padding: 2rem;
+    padding: 2rem 1.8rem;
     background: var(--paper);
-    border-radius: 18px;
+    border-radius: 16px;
     border: 1px solid var(--line);
-    display: flex;
+    display: grid;
+    grid-template-columns: 56px 1fr;
     gap: 1.2rem;
     align-items: flex-start;
+    position: relative;
+    transition: transform .3s, box-shadow .3s;
   }
-
+  .exp-feature:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -22px rgba(29, 42, 20, 0.2); }
   .exp-feature-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
+    width: 52px; height: 52px;
+    border-radius: 50%;
     background: var(--cream-deep);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     color: var(--olive-deep);
+    flex-shrink: 0;
+    position: relative;
   }
-
+  .exp-feature-icon::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 1px dashed currentColor;
+    opacity: 0.3;
+  }
   .exp-feature:nth-child(2) .exp-feature-icon { background: var(--lemon); }
   .exp-feature:nth-child(3) .exp-feature-icon { background: var(--olive-soft); color: var(--cream); }
   .exp-feature:nth-child(4) .exp-feature-icon { background: var(--terra); color: var(--cream); }
-
-  .exp-feature h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .exp-feature p {
-    font-size: 0.94rem;
-    color: var(--ink-soft);
-    line-height: 1.55;
+  .exp-feature h4 { font-size: 1.3rem; margin-bottom: 0.4rem; font-weight: 400; }
+  .exp-feature h4 em { color: var(--olive-deep); }
+  .exp-feature p { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.55; }
+  .exp-feature-num {
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--terra);
+    letter-spacing: 0.1em;
   }
 
   /* ============ VISITA ============ */
   .visit {
-    padding: 8rem 2.5rem;
-    text-align: center;
+    padding: 8rem 2rem;
     background: var(--paper);
+    position: relative;
+    overflow: hidden;
   }
-
   .visit-inner {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
   }
-
+  .visit-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(8rem, 22vw, 22rem);
+    color: var(--cream-deep);
+    opacity: 0.5;
+    pointer-events: none;
+    line-height: 0.8;
+    z-index: 0;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
   .visit h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1.02;
+    margin-bottom: 1.3rem;
+    font-weight: 300;
   }
-
-  .visit h2 em { font-style: italic; color: var(--olive-deep); }
-
+  .visit h2 em { font-style: italic; color: var(--olive-deep); font-weight: 400; }
   .visit > .visit-inner > p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--ink-soft);
-    max-width: 50ch;
+    max-width: 52ch;
     margin: 0 auto 3.5rem;
+    line-height: 1.55;
   }
-
   .visit-info {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .info-block {
-    padding: 2rem 1rem;
-    border-top: 2px solid var(--lemon);
+    gap: 1.5rem;
     text-align: left;
   }
-
-  .info-block h4 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--olive);
-    margin-bottom: 0.8rem;
-    font-weight: 600;
+  .info-block {
+    padding: 2rem 1.2rem;
+    background: var(--cream);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--lemon);
+    position: relative;
   }
-
+  .info-block:nth-child(2) { border-top-color: var(--terra); }
+  .info-block:nth-child(3) { border-top-color: var(--olive-deep); }
+  .info-block h4 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--terra);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
   .info-block p {
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
+    font-family: var(--serif);
+    font-size: 1.15rem;
     color: var(--ink);
     line-height: 1.5;
+    font-weight: 400;
   }
+  .info-block p em { color: var(--olive-deep); }
 
   /* ============ FOOTER ============ */
   footer {
     background: var(--ink);
     color: var(--cream);
-    padding: 4rem 2.5rem 2rem;
-    text-align: center;
+    padding: 5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
   }
-
-  footer .nav-logo {
-    color: var(--cream);
-    justify-content: center;
-    margin-bottom: 1rem;
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 4rem;
   }
-
-  .footer-tag {
-    font-family: 'Fraunces', serif;
+  .footer-brand .mono-mark { background: var(--lemon); color: var(--ink); margin-bottom: 1.2rem; }
+  .footer-brand .mono-wordmark { color: var(--cream); }
+  .footer-brand .mono-wordmark em { color: var(--lemon); }
+  .footer-tagline {
+    font-family: var(--serif);
     font-style: italic;
-    font-size: 1.15rem;
-    opacity: 0.75;
-    margin-bottom: 3rem;
+    font-size: 1.4rem;
+    margin-top: 1.2rem;
+    line-height: 1.2;
+    max-width: 22ch;
+    color: var(--cream);
+    font-weight: 300;
   }
-
+  .footer-tagline em { color: var(--lemon); }
+  .footer-col h5 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--lemon);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    color: rgba(244, 236, 216, 0.78);
+  }
+  .footer-col a { color: inherit; text-decoration: none; transition: color .2s; }
+  .footer-col a:hover { color: var(--lemon); }
   .footer-bottom {
     padding-top: 2rem;
-    border-top: 1px solid rgba(251, 247, 238, 0.12);
-    font-size: 0.82rem;
-    opacity: 0.55;
+    border-top: 1px solid rgba(244, 236, 216, 0.14);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(244, 236, 216, 0.55);
+    text-transform: uppercase;
   }
 
+  /* Big footer typo */
+  .footer-big {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(4rem, 18vw, 18rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--olive-deep);
+    text-align: center;
+    margin: 0 -1rem 3rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .footer-big .terra { color: var(--terra); }
+  .footer-big .lemon { color: var(--lemon); }
+
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     nav { padding: 1rem 1.2rem; }
     nav.scrolled { padding: 0.7rem 1.2rem; }
     .nav-links { display: none; }
+    .nav-links.cta-only { display: flex; }
 
-    .hero { padding: 6rem 1.2rem 2rem; }
-    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-visual { height: 400px; order: -1; }
-    .seal { width: 80px; height: 80px; }
+    .hero { padding: 6rem 1.2rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-visual { height: 420px; order: -1; }
+    .seal { width: 90px; height: 90px; }
+    .vert-caption { display: none; }
 
-    .filosofia, .menu, .experience, .visit { padding: 5rem 1.2rem; }
+    .filosofia, .menu, .experience, .visit { padding: 5.5rem 1.2rem; }
     .menu { border-radius: 36px 36px 0 0; }
-
+    .filosofia-head { grid-template-columns: 1fr; gap: 1.5rem; }
     .pillars { grid-template-columns: 1fr; }
     .exp-grid { grid-template-columns: 1fr; }
     .visit-info { grid-template-columns: 1fr; }
-
-    .menu-header { flex-direction: column; align-items: flex-start; }
-
+    .menu-header { grid-template-columns: 1fr; }
     .builder { padding: 2rem 1.5rem; }
     .builder-steps { grid-template-columns: 1fr 1fr; }
-    .builder-header { flex-direction: column; align-items: flex-start; }
-    .builder-header p { text-align: left; }
+    .builder-header { grid-template-columns: 1fr; }
+    .builder-side { align-items: flex-start; }
+    .builder-side p { text-align: left; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
   }
-
-  @media (max-width: 500px) {
+  @media (max-width: 520px) {
     .builder-steps { grid-template-columns: 1fr; }
     .dishes-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 3.4rem; }
+    .hero-values { gap: 0.5rem; }
+    .value-item { flex: 1 1 45%; min-width: 130px; border-right: none; padding: 0 !important; }
   }
 </style>
 </head>
@@ -984,92 +1054,94 @@
 
 <!-- ============ NAV ============ -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
-    <!-- Logo Citrus Garden: limonero -->
-    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <!-- Hoja izquierda -->
-      <path d="M 15 27 Q 19 17 29 21 Q 25 30 15 27 Z" fill="#5b7f3a"/>
-      <!-- Hoja derecha -->
-      <path d="M 45 27 Q 41 17 31 21 Q 35 30 45 27 Z" fill="#7ba64c"/>
-      <!-- Limón -->
-      <ellipse cx="30" cy="36" rx="14" ry="12" fill="#f4c84a"/>
-      <ellipse cx="26" cy="33" rx="3" ry="2" fill="#f8dc7a" opacity="0.7"/>
-      <!-- Puntas -->
-      <circle cx="16.5" cy="36" r="1" fill="#d9a82f"/>
-      <circle cx="43.5" cy="36" r="1" fill="#d9a82f"/>
-      <!-- Tallo -->
-      <line x1="30" y1="24" x2="30" y2="21" stroke="#3d5c22" stroke-width="1"/>
-    </svg>
-    <span class="nav-logo-text">Serena <em>Bites</em></span>
+  <a href="#" class="mono-logo">
+    <span class="mono-mark"><span>sb</span></span>
+    <span class="mono-wordmark">Serena<br><em>Bites.</em></span>
   </a>
   <ul class="nav-links">
     <li><a href="#filosofia">Filosofía</a></li>
     <li><a href="#carta">Carta</a></li>
     <li><a href="#experiencia">El método</a></li>
-    <li><a href="#visita" class="nav-cta">Reserva</a></li>
+    <li><a href="#visita" class="nav-cta">Reserva →</a></li>
   </ul>
 </nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-tag"><span class="dot"></span> Real food · Mediterranean soul</div>
-      <h1>
-        Comida <em>real,</em><br>
-        cocinada con <span class="underline">cuidado.</span>
-      </h1>
-      <p class="hero-sub">Cocina mediterránea cuidada en formato bowl, poké, brunch y açaí. Producto de temporada, técnica honesta y sabor que nutre — el tipo de comida que apetece a diario.</p>
-      <div class="hero-ctas">
-        <a href="#carta" class="btn btn-primary">Descubre la carta <span class="btn-arrow">→</span></a>
-        <a href="carta-serena-bites.pdf" download class="btn btn-secondary">⤓ Carta en PDF</a>
+      <div class="hero-meta">
+        <span class="dot"></span>
+        <span>Est. 2026</span>
+        <span class="line"></span>
+        <span>Real food · Mediterranean soul</span>
       </div>
+      <h1>
+        Comida <span class="it">real,</span><br>
+        cocinada <span class="amp">&amp;</span><br>
+        servida con <span class="ul">cuidado.</span>
+      </h1>
+      <p class="hero-sub">Bowls, pokés, brunch y açaí mediterráneos — producto de temporada, técnica honesta y sabor que nutre. El tipo de comida que apetece a diario.</p>
+      <div class="hero-ctas">
+        <a href="#carta" class="btn btn-primary">
+          Descubre la carta
+          <span class="btn-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a href="carta-serena-bites.pdf" download class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Carta en PDF
+        </a>
+      </div>
+
       <div class="hero-values">
         <div class="value-item">
-          <div class="value-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L13.5 9H21L15 13L17 20L12 16L7 20L9 13L3 9H10.5L12 2Z" fill="currentColor"/></svg>
-          </div>
-          <div class="value-text">Cocina<br>de temporada</div>
+          <span class="value-num">01 / SOURCE</span>
+          <span class="value-text">Producto de<br>temporada</span>
         </div>
         <div class="value-item">
-          <div class="value-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="currentColor"/></svg>
-          </div>
-          <div class="value-text">Producto<br>de proximidad</div>
+          <span class="value-num">02 / CRAFT</span>
+          <span class="value-text">Cocinado<br>cada día</span>
         </div>
         <div class="value-item">
-          <div class="value-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-          </div>
-          <div class="value-text">Sin azúcares<br>refinados</div>
+          <span class="value-num">03 / TASTE</span>
+          <span class="value-text">Sabor<br>que nutre</span>
         </div>
       </div>
     </div>
 
     <div class="hero-visual">
-      <!-- Sello giratorio amarillo -->
+      <!-- Sello giratorio -->
       <svg class="seal" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <path id="circlePath" d="M 60 60 m -45 0 a 45 45 0 1 1 90 0 a 45 45 0 1 1 -90 0"/>
         </defs>
-        <circle cx="60" cy="60" r="58" fill="#f4c84a"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="#3d5c22" stroke-width="0.5"/>
-        <text fill="#3d5c22" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2">
-          <textPath href="#circlePath">REAL FOOD · DONE RIGHT · REAL FOOD · DONE RIGHT · </textPath>
+        <circle cx="60" cy="60" r="58" fill="#efb73a"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#2d4717" stroke-width="0.6"/>
+        <text fill="#2d4717" font-family="JetBrains Mono, monospace" font-size="8" font-weight="500" letter-spacing="2.5">
+          <textPath href="#circlePath">REAL FOOD · DONE RIGHT · EST 2026 · REAL FOOD · DONE RIGHT · </textPath>
         </text>
-        <text x="60" y="56" text-anchor="middle" fill="#3d5c22" font-family="Fraunces, serif" font-size="13" font-style="italic" font-weight="500">eat</text>
-        <text x="60" y="72" text-anchor="middle" fill="#3d5c22" font-family="Fraunces, serif" font-size="13" font-style="italic" font-weight="500">real</text>
+        <text x="60" y="55" text-anchor="middle" fill="#2d4717" font-family="Fraunces, serif" font-size="14" font-style="italic" font-weight="400">eat</text>
+        <text x="60" y="73" text-anchor="middle" fill="#2d4717" font-family="Fraunces, serif" font-size="14" font-style="italic" font-weight="400">real</text>
+        <circle cx="60" cy="60" r="2" fill="#2d4717"/>
       </svg>
 
       <div class="photo photo-1">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowl mediterráneo con quinoa y verduras">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80" alt="Bowl mediterráneo con quinoa">
       </div>
       <div class="photo photo-2">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Tostada de aguacate con huevo">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Tostada de aguacate con huevo">
       </div>
       <div class="photo photo-3">
-        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Poké de salmón fresco">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=700&q=80" alt="Poké de salmón fresco">
       </div>
+      <div class="vert-caption">Frame N°01 · spring menu</div>
     </div>
   </div>
 </section>
@@ -1077,46 +1149,51 @@
 <!-- ============ MARQUEE ============ -->
 <div class="marquee">
   <div class="marquee-track">
-    <div class="marquee-item">Real food</div>
-    <div class="marquee-item">Mediterranean soul</div>
-    <div class="marquee-item">Producto de temporada</div>
-    <div class="marquee-item">Hecho cada día</div>
-    <div class="marquee-item">Sabor que nutre</div>
-    <div class="marquee-item">Eat real</div>
-    <div class="marquee-item">Real food</div>
-    <div class="marquee-item">Mediterranean soul</div>
-    <div class="marquee-item">Producto de temporada</div>
-    <div class="marquee-item">Hecho cada día</div>
-    <div class="marquee-item">Sabor que nutre</div>
-    <div class="marquee-item">Eat real</div>
+    <div class="marquee-item">Real food <span class="star">✦</span></div>
+    <div class="marquee-item">Mediterranean soul <span class="star">✦</span></div>
+    <div class="marquee-item">Producto de temporada <span class="star">✦</span></div>
+    <div class="marquee-item">Hecho cada día <span class="star">✦</span></div>
+    <div class="marquee-item">Sabor que nutre <span class="star">✦</span></div>
+    <div class="marquee-item">Eat real <span class="star">✦</span></div>
+    <div class="marquee-item">Real food <span class="star">✦</span></div>
+    <div class="marquee-item">Mediterranean soul <span class="star">✦</span></div>
+    <div class="marquee-item">Producto de temporada <span class="star">✦</span></div>
+    <div class="marquee-item">Hecho cada día <span class="star">✦</span></div>
+    <div class="marquee-item">Sabor que nutre <span class="star">✦</span></div>
+    <div class="marquee-item">Eat real <span class="star">✦</span></div>
   </div>
 </div>
 
 <!-- ============ FILOSOFÍA ============ -->
 <section class="filosofia" id="filosofia">
-  <div class="section-eyebrow">Nuestra filosofía</div>
-  <h2>Cuando el producto es <em>bueno,</em> la cocina es <em>sencilla.</em></h2>
+  <div class="filosofia-head">
+    <div>
+      <div class="eyebrow">N°01 · Filosofía</div>
+      <h2>Cuando el producto es <em>bueno,</em> la cocina es <em>sencilla.</em></h2>
+    </div>
+    <div class="filosofia-quote">
+      “No reinventamos. Compramos bien, cocinamos cada día y dejamos que el ingrediente brille.”
+      <span>— Equipo Serena</span>
+    </div>
+  </div>
 
   <div class="pillars">
     <div class="pillar">
-      <div class="pillar-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="currentColor"/></svg>
-      </div>
-      <h3>Producto que importa</h3>
+      <span class="pillar-num">01</span>
+      <div class="pillar-tag">Source</div>
+      <h3>Producto que <em>importa</em></h3>
       <p>Verduras de temporada, proteínas de origen responsable, aceite de oliva virgen extra como base. Nos importa de dónde viene cada ingrediente — y se nota en el sabor.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      </div>
-      <h3>Cocinado a diario</h3>
+      <span class="pillar-num">02</span>
+      <div class="pillar-tag">Craft</div>
+      <h3>Cocinado <em>a diario</em></h3>
       <p>Salsas hechas en casa, granolas tostadas en el horno, hummus batido cada mañana. Cocina honesta, sin atajos ni conservantes — como debería ser siempre.</p>
     </div>
     <div class="pillar">
-      <div class="pillar-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L14 8H20L15 12L17 19L12 15L7 19L9 12L4 8H10L12 2Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
-      </div>
-      <h3>Equilibrado y sabroso</h3>
+      <span class="pillar-num">03</span>
+      <div class="pillar-tag">Balance</div>
+      <h3>Equilibrado <em>y sabroso</em></h3>
       <p>Cada plato pensado para alimentar bien y dejar buen sabor. Hidratos integrales, proteína cuidada, vegetales abundantes y salsas con personalidad — la fórmula mediterránea.</p>
     </div>
   </div>
@@ -1127,95 +1204,86 @@
   <div class="menu-inner">
     <div class="menu-header">
       <div>
-        <div class="section-eyebrow">La carta</div>
-        <h2>Cuatro mundos. <em>Un mismo cuidado.</em></h2>
+        <div class="eyebrow">N°02 · La carta</div>
+        <h2>Cuatro mundos.<br><em>Un mismo</em> cuidado.<span class="num">⁴</span></h2>
       </div>
       <a href="carta-serena-bites.pdf" download class="btn btn-primary">
-        ⤓ Carta completa en PDF <span class="btn-arrow">→</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Carta completa en PDF
       </a>
     </div>
 
     <div class="menu-tabs">
-      <button class="menu-tab active" data-cat="bowls">Pokés &amp; Bowls</button>
-      <button class="menu-tab" data-cat="wraps">Wraps &amp; Pitas</button>
-      <button class="menu-tab" data-cat="brunch">Brunch &amp; Tostadas</button>
-      <button class="menu-tab" data-cat="dulces">Yogur &amp; Açaí</button>
+      <button class="menu-tab active" data-cat="bowls"><span class="tab-num">01</span>Pokés &amp; Bowls</button>
+      <button class="menu-tab" data-cat="wraps"><span class="tab-num">02</span>Wraps &amp; Pitas</button>
+      <button class="menu-tab" data-cat="brunch"><span class="tab-num">03</span>Brunch &amp; Tostadas</button>
+      <button class="menu-tab" data-cat="dulces"><span class="tab-num">04</span>Yogur &amp; Açaí</button>
     </div>
 
-    <!-- POKÉS & BOWLS (con builder) -->
+    <!-- POKÉS & BOWLS -->
     <div class="menu-category active" data-cat="bowls">
       <div class="category-intro">
         <h3>Pokés &amp; <em>bowls</em> de temporada</h3>
         <p>Cuatro recetas firma con su carácter, y la libertad de crear el tuyo a medida. Todos sobre arroz integral o quinoa, con aceite de oliva como base de cocina.</p>
       </div>
-
       <div class="dishes-grid">
         <div class="dish-card">
           <div class="dish-img">
             <span class="dish-tag signature">Signature</span>
             <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Poké Sakura">
           </div>
-          <div class="dish-head">
-            <div class="dish-name">Poké Sakura</div>
-            <div class="dish-price">13,50 €</div>
-          </div>
+          <div class="dish-num">№ 01</div>
+          <div class="dish-head"><div class="dish-name">Poké Sakura</div><div class="dish-price">13,50 €</div></div>
           <p class="dish-desc">Salmón fresco marinado en soja-jengibre, arroz integral templado, edamame, pepino, aguacate, cebolla crujiente y mayonesa de wasabi suave.</p>
         </div>
-
         <div class="dish-card">
           <div class="dish-img">
             <span class="dish-tag signature">Signature</span>
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowl Mediterráneo">
           </div>
-          <div class="dish-head">
-            <div class="dish-name">Bowl Mediterráneo</div>
-            <div class="dish-price">11,90 €</div>
-          </div>
+          <div class="dish-num">№ 02</div>
+          <div class="dish-head"><div class="dish-name">Bowl Mediterráneo</div><div class="dish-price">11,90 €</div></div>
           <p class="dish-desc">Quinoa, pollo al limón con hierbas, tomate cherry, hummus de cúrcuma, pepino, olivas Kalamata, feta y aceite de orégano.</p>
         </div>
-
         <div class="dish-card">
           <div class="dish-img">
             <span class="dish-tag veg">100% planta</span>
             <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Bowl Garden">
           </div>
-          <div class="dish-head">
-            <div class="dish-name">Bowl Garden</div>
-            <div class="dish-price">10,90 €</div>
-          </div>
+          <div class="dish-num">№ 03</div>
+          <div class="dish-head"><div class="dish-name">Bowl Garden</div><div class="dish-price">10,90 €</div></div>
           <p class="dish-desc">Falafel recién horneado, quinoa, hummus, kale masajeado con limón, granada, zanahoria asada, semillas y tahini cítrico.</p>
         </div>
-
         <div class="dish-card">
           <div class="dish-img">
             <span class="dish-tag signature">Signature</span>
             <img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&q=80" alt="Poké Tropical">
           </div>
-          <div class="dish-head">
-            <div class="dish-name">Poké Tropical</div>
-            <div class="dish-price">12,90 €</div>
-          </div>
+          <div class="dish-num">№ 04</div>
+          <div class="dish-head"><div class="dish-name">Poké Tropical</div><div class="dish-price">12,90 €</div></div>
           <p class="dish-desc">Atún rojo, arroz, mango maduro, edamame, pepino, aguacate, cebolla morada, sésamo tostado y salsa ponzu cítrica.</p>
         </div>
       </div>
 
-      <!-- BUILD YOUR OWN -->
       <div class="builder">
         <div class="builder-inner">
           <div class="builder-header">
             <div>
+              <div class="eyebrow" style="color: var(--lemon);">— Build your own</div>
               <h3>O créalo a tu <em>medida</em></h3>
+            </div>
+            <div class="builder-side">
               <div class="builder-price">
                 <strong>11,90 €</strong>
                 <span>· bowl personalizado</span>
               </div>
+              <p>Cuatro pasos. Tu combinación favorita en tu próximo bowl.</p>
             </div>
-            <p>Cuatro pasos. Tu combinación favorita en tu próximo bowl.</p>
           </div>
 
           <div class="builder-steps">
             <div class="builder-step">
-              <div class="step-num">— Paso 01</div>
+              <div class="step-num">PASO 01</div>
               <div class="step-title">Elige base</div>
               <ul class="step-options">
                 <li>Arroz integral</li>
@@ -1223,9 +1291,8 @@
                 <li>Mix verde (sin hidrato)</li>
               </ul>
             </div>
-
             <div class="builder-step">
-              <div class="step-num">— Paso 02</div>
+              <div class="step-num">PASO 02</div>
               <div class="step-title">Tu proteína</div>
               <ul class="step-options">
                 <li>Salmón marinado</li>
@@ -1235,9 +1302,8 @@
                 <li>Tofu marinado · veggie</li>
               </ul>
             </div>
-
             <div class="builder-step">
-              <div class="step-num">— Paso 03</div>
+              <div class="step-num">PASO 03</div>
               <div class="step-title">Tres toppings</div>
               <ul class="step-options">
                 <li>Aguacate · edamame</li>
@@ -1248,9 +1314,8 @@
                 <li>Zanahoria · semillas</li>
               </ul>
             </div>
-
             <div class="builder-step">
-              <div class="step-num">— Paso 04</div>
+              <div class="step-num">PASO 04</div>
               <div class="step-title">Tu salsa</div>
               <ul class="step-options">
                 <li>Ponzu cítrico</li>
@@ -1273,44 +1338,27 @@
       </div>
       <div class="dishes-grid">
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80" alt="Wrap Caesar">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Wrap Caesar</div>
-            <div class="dish-price">9,50 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80" alt="Wrap Caesar"></div>
+          <div class="dish-num">№ 05</div>
+          <div class="dish-head"><div class="dish-name">Wrap Caesar</div><div class="dish-price">9,50 €</div></div>
           <p class="dish-desc">Tortilla integral, pollo asado a la sal, romana fresca, parmesano de pasto, picatostes de pan de masa madre y César cremosa de la casa.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag veg">Vegetariano</span>
-            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Pita Halloumi">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Pita Halloumi</div>
-            <div class="dish-price">10,50 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag veg">Vegetariano</span><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Pita Halloumi"></div>
+          <div class="dish-num">№ 06</div>
+          <div class="dish-head"><div class="dish-name">Pita Halloumi</div><div class="dish-price">10,50 €</div></div>
           <p class="dish-desc">Halloumi a la plancha, hummus de cúrcuma, hojas verdes, tomate maduro, pepino y tzatziki fresco con menta dentro de pita esponjosa.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=600&q=80" alt="Wrap Pollo Mediterráneo">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Wrap Mediterráneo</div>
-            <div class="dish-price">9,90 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=600&q=80" alt="Wrap Pollo Mediterráneo"></div>
+          <div class="dish-num">№ 07</div>
+          <div class="dish-head"><div class="dish-name">Wrap Mediterráneo</div><div class="dish-price">9,90 €</div></div>
           <p class="dish-desc">Pollo al limón con hierbas, hummus, tomate cherry, pepino, feta, olivas Kalamata, espinaca baby y aceite de orégano.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80" alt="Wrap Salmón">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Wrap Salmón</div>
-            <div class="dish-price">11,50 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80" alt="Wrap Salmón"></div>
+          <div class="dish-num">№ 08</div>
+          <div class="dish-head"><div class="dish-name">Wrap Salmón</div><div class="dish-price">11,50 €</div></div>
           <p class="dish-desc">Salmón ahumado, queso fresco con cebollino, aguacate machacado en el plato, rúcula con pimienta, alcaparras y eneldo fresco.</p>
         </div>
       </div>
@@ -1324,44 +1372,27 @@
       </div>
       <div class="dishes-grid">
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="Tostada Avocado">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Avocado Toast</div>
-            <div class="dish-price">8,90 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="Tostada Avocado"></div>
+          <div class="dish-num">№ 09</div>
+          <div class="dish-head"><div class="dish-name">Avocado Toast</div><div class="dish-price">8,90 €</div></div>
           <p class="dish-desc">Pan de masa madre, aguacate machacado en el plato, huevo poché, ralladura de lima, escamas de chile suave y AOVE arbequino.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag veg">Vegetariano</span>
-            <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80" alt="Tostada Ricotta">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Ricotta &amp; Frutos rojos</div>
-            <div class="dish-price">8,50 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag veg">Vegetariano</span><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80" alt="Tostada Ricotta"></div>
+          <div class="dish-num">№ 10</div>
+          <div class="dish-head"><div class="dish-name">Ricotta &amp; Frutos rojos</div><div class="dish-price">8,50 €</div></div>
           <p class="dish-desc">Ricotta fresca batida con un toque de miel cruda, frutos rojos de temporada, pistacho del Mediterráneo y ralladura de limón.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=600&q=80" alt="Quesadilla Verde">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Quesadilla Verde</div>
-            <div class="dish-price">9,90 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=600&q=80" alt="Quesadilla Verde"></div>
+          <div class="dish-num">№ 11</div>
+          <div class="dish-head"><div class="dish-name">Quesadilla Verde</div><div class="dish-price">9,90 €</div></div>
           <p class="dish-desc">Tortilla de espinacas, pollo desmenuzado, queso curado de cabra, espinaca baby, salsa verde con cilantro fresco y lima exprimida.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600&q=80" alt="Tostada Salmón">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Smoked Salmon Toast</div>
-            <div class="dish-price">11,50 €</div>
-          </div>
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600&q=80" alt="Tostada Salmón"></div>
+          <div class="dish-num">№ 12</div>
+          <div class="dish-head"><div class="dish-name">Smoked Salmon Toast</div><div class="dish-price">11,50 €</div></div>
           <p class="dish-desc">Pan integral de centeno, salmón ahumado en finas capas, queso fresco con cebollino, aguacate, alcaparras y un toque de eneldo.</p>
         </div>
       </div>
@@ -1375,47 +1406,27 @@
       </div>
       <div class="dishes-grid">
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag sweet">De temporada</span>
-            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80" alt="Berry Bowl">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Berry Bowl</div>
-            <div class="dish-price">8,50 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag sweet">De temporada</span><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80" alt="Berry Bowl"></div>
+          <div class="dish-num">№ 13</div>
+          <div class="dish-head"><div class="dish-name">Berry Bowl</div><div class="dish-price">8,50 €</div></div>
           <p class="dish-desc">Yogur griego artesano, granola de la casa con miel, fresas, arándanos y plátano. Un toque de miel cruda al final.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag sweet">Antioxidante</span>
-            <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=600&q=80" alt="Açaí Classic">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Açaí Classic</div>
-            <div class="dish-price">9,50 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag sweet">Antioxidante</span><img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=600&q=80" alt="Açaí Classic"></div>
+          <div class="dish-num">№ 14</div>
+          <div class="dish-head"><div class="dish-name">Açaí Classic</div><div class="dish-price">9,50 €</div></div>
           <p class="dish-desc">Açaí amazónico cremoso, plátano, fresas frescas, granola, coco rallado, semillas de chía y un toque de miel cruda.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag sweet">Cremoso</span>
-            <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80" alt="Yogur Helado">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Frozen Yogurt &amp; Nutella</div>
-            <div class="dish-price">8,90 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag sweet">Cremoso</span><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80" alt="Yogur Helado"></div>
+          <div class="dish-num">№ 15</div>
+          <div class="dish-head"><div class="dish-name">Frozen Yogurt &amp; Nutella</div><div class="dish-price">8,90 €</div></div>
           <p class="dish-desc">Helado artesano de yogur griego, plátano, fresas, un drizzle de Nutella, almendras laminadas y galletas caseras de avena.</p>
         </div>
         <div class="dish-card">
-          <div class="dish-img">
-            <span class="dish-tag sweet">Tropical</span>
-            <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=600&q=80" alt="Açaí Tropical">
-          </div>
-          <div class="dish-head">
-            <div class="dish-name">Açaí Tropical</div>
-            <div class="dish-price">9,90 €</div>
-          </div>
+          <div class="dish-img"><span class="dish-tag sweet">Tropical</span><img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=600&q=80" alt="Açaí Tropical"></div>
+          <div class="dish-num">№ 16</div>
+          <div class="dish-head"><div class="dish-name">Açaí Tropical</div><div class="dish-price">9,90 €</div></div>
           <p class="dish-desc">Açaí, mango maduro, kiwi, piña, granola de coco, mantequilla de cacahuete artesana y mix de semillas de la casa.</p>
         </div>
       </div>
@@ -1423,7 +1434,10 @@
 
     <div class="menu-download">
       <p>Llévate la carta completa para verla con calma o compartirla.</p>
-      <a href="carta-serena-bites.pdf" download class="btn btn-primary">⤓ Carta en PDF <span class="btn-arrow">→</span></a>
+      <a href="carta-serena-bites.pdf" download class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Carta en PDF
+      </a>
     </div>
   </div>
 </section>
@@ -1431,47 +1445,48 @@
 <!-- ============ EXPERIENCIA / EL MÉTODO ============ -->
 <section class="experience" id="experiencia">
   <div class="exp-inner">
-    <div class="section-eyebrow">El método</div>
+    <div class="eyebrow">N°03 · El método</div>
     <h2>Comer <em>bien</em> es la nueva normalidad.</h2>
     <p>Pensamos cada plato y cada decisión del local con un objetivo: que comer aquí sea una elección que te alimente — bien, en sabor y en cuerpo.</p>
 
     <div class="exp-grid">
       <div class="exp-feature">
         <div class="exp-feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M5 9c0-4 3-7 7-7s7 3 7 7M5 15c0 4 3 7 7 7s7-3 7-7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M5 9c0-4 3-7 7-7s7 3 7 7M5 15c0 4 3 7 7 7s7-3 7-7" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
         </div>
         <div>
-          <h4>De temporada, siempre</h4>
+          <span class="exp-feature-num">01</span>
+          <h4>De temporada, <em>siempre</em></h4>
           <p>La carta cambia con el calendario. La huerta manda — primavera trae espárragos y guisantes, otoño trae calabaza y granada. Sabor en su mejor momento.</p>
         </div>
       </div>
-
       <div class="exp-feature">
         <div class="exp-feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.6"/></svg>
         </div>
         <div>
-          <h4>Personalízalo</h4>
+          <span class="exp-feature-num">02</span>
+          <h4>Personalízalo a <em>tu medida</em></h4>
           <p>Build your own bowl: tu base, tu proteína, tres toppings y tu salsa. Y casi cualquier plato de la carta admite cambios para adaptarse a ti.</p>
         </div>
       </div>
-
       <div class="exp-feature">
         <div class="exp-feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
         </div>
         <div>
-          <h4>Para todos los planes</h4>
+          <span class="exp-feature-num">03</span>
+          <h4>Para <em>todos</em> los planes</h4>
           <p>Sin gluten, vegetariano, vegano, keto. Más del 60% de la carta tiene su versión adaptada — y te ayudamos a elegir la que mejor te encaje.</p>
         </div>
       </div>
-
       <div class="exp-feature">
         <div class="exp-feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
         </div>
         <div>
-          <h4>Ingrediente con origen</h4>
+          <span class="exp-feature-num">04</span>
+          <h4>Ingrediente <em>con origen</em></h4>
           <p>Trabajamos con productores locales y de proximidad. Pescado de lonja, vegetales del huerto, aceites de denominación. Cada producto, su historia.</p>
         </div>
       </div>
@@ -1481,23 +1496,24 @@
 
 <!-- ============ VISITA ============ -->
 <section class="visit" id="visita">
+  <div class="visit-bg-text">hola.</div>
   <div class="visit-inner">
-    <div class="section-eyebrow">Visítanos</div>
-    <h2>Una mesa esperándote, <em>cuando quieras</em>.</h2>
+    <div class="eyebrow" style="justify-content: center;">N°04 · Visítanos</div>
+    <h2>Una mesa esperándote,<br><em>cuando quieras.</em></h2>
     <p>Quédate a comer con calma, recógelo en barra o pídelo a casa. Nosotros nos encargamos del resto — tú elige cómo te apetece más hoy.</p>
 
     <div class="visit-info">
       <div class="info-block">
-        <h4>Horario</h4>
-        <p>Lun — Vie · 09:00 — 22:00<br>Sáb — Dom · 10:00 — 23:00</p>
+        <h4>— Horario</h4>
+        <p><em>Lun — Vie</em><br>09:00 — 22:00<br><br><em>Sáb — Dom</em><br>10:00 — 23:00</p>
       </div>
       <div class="info-block">
-        <h4>Reservas</h4>
-        <p>+34 000 000 000<br>hola@serenabites.com</p>
+        <h4>— Reservas</h4>
+        <p>+34 000 000 000<br>hola@<em>serenabites</em>.com<br><br><em>Para grupos</em><br>+10 personas</p>
       </div>
       <div class="info-block">
-        <h4>Dirección</h4>
-        <p>Por anunciar<br>Próxima apertura</p>
+        <h4>— Dirección</h4>
+        <p><em>Por anunciar</em><br>Próxima apertura<br><br><em>Síguenos</em><br>@serenabites</p>
       </div>
     </div>
   </div>
@@ -1505,21 +1521,43 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <a href="#" class="nav-logo">
-    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 15 27 Q 19 17 29 21 Q 25 30 15 27 Z" fill="#7ba64c"/>
-      <path d="M 45 27 Q 41 17 31 21 Q 35 30 45 27 Z" fill="#a8c882"/>
-      <ellipse cx="30" cy="36" rx="14" ry="12" fill="#f4c84a"/>
-      <ellipse cx="26" cy="33" rx="3" ry="2" fill="#f8dc7a" opacity="0.7"/>
-      <line x1="30" y1="24" x2="30" y2="21" stroke="#7ba64c" stroke-width="1"/>
-    </svg>
-    <span class="nav-logo-text" style="color: var(--cream);">Serena <em>Bites</em></span>
-  </a>
-  <div class="footer-tag">Real food. Mediterranean soul.</div>
-  <div class="footer-bottom">© 2026 Serena Bites · Cocina mediterránea cuidada</div>
+  <div class="footer-big">eat <span class="terra">real</span>, <span class="lemon">always</span>.</div>
+
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="mono-logo">
+        <span class="mono-mark"><span>sb</span></span>
+        <span class="mono-wordmark">Serena<br><em>Bites.</em></span>
+      </a>
+      <div class="footer-tagline">Real food. <em>Mediterranean</em> soul.</div>
+    </div>
+    <div class="footer-col">
+      <h5>— Carta</h5>
+      <ul>
+        <li><a href="#carta">Pokés &amp; Bowls</a></li>
+        <li><a href="#carta">Wraps &amp; Pitas</a></li>
+        <li><a href="#carta">Brunch</a></li>
+        <li><a href="#carta">Yogur &amp; Açaí</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>— Contacto</h5>
+      <ul>
+        <li>+34 000 000 000</li>
+        <li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660e090a0726150314030807040f1203154805090b">[email&#160;protected]</a></li>
+        <li>@serenabites</li>
+        <li><a href="#visita">Reservas</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 · Serena Bites</span>
+    <span>Cocina mediterránea · Hecha con cuidado</span>
+  </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) nav.classList.add('scrolled');
@@ -1550,7 +1588,7 @@
   document.querySelectorAll('.pillar, .dish-card, .exp-feature, .info-block, .builder').forEach((el, i) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
-    el.style.transition = `opacity 0.7s ease ${i * 0.04}s, transform 0.7s ease ${i * 0.04}s`;
+    el.style.transition = `opacity .8s ease ${i * 0.04}s, transform .8s ease ${i * 0.04}s`;
     obs.observe(el);
   });
 </script>

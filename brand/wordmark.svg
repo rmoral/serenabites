@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" role="img" aria-label="Serena Bites">
+  <title>Serena Bites — Wordmark</title>
+  <g font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-weight="500" letter-spacing="-2">
+    <text x="20" y="78" font-size="80" fill="#1d2a14">Serena</text>
+    <text x="20" y="148" font-size="80" font-style="italic" font-weight="400" fill="#b0481f">Bites<tspan fill="#1d2a14">.</tspan></text>
+  </g>
+</svg>

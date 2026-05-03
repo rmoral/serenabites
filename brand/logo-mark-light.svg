@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Serena Bites">
+  <title>Serena Bites — Monograma SB (claro)</title>
+  <circle cx="100" cy="100" r="98" fill="#efb73a"></circle>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#2d4717" stroke-width="1.2" opacity="0.5"></circle>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#2d4717" stroke-width="0.6" opacity="0.35"></circle>
+  <g fill="#2d4717" opacity="0.6">
+    <circle cx="100" cy="14" r="1.6"></circle>
+    <circle cx="186" cy="100" r="1.6"></circle>
+    <circle cx="100" cy="186" r="1.6"></circle>
+    <circle cx="14" cy="100" r="1.6"></circle>
+  </g>
+  <text x="100" y="135" text-anchor="middle" font-family="&#39;Fraunces&#39;, &#39;Times New Roman&#39;, serif" font-style="italic" font-weight="500" font-size="118" fill="#2d4717" letter-spacing="-6">sb</text>
+  <circle cx="148" cy="128" r="4.5" fill="#b0481f"></circle>
+</svg>
