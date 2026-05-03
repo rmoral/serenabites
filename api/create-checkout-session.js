@@ -11,30 +11,14 @@
  */
 
 import Stripe from 'stripe';
+import db from '../admin/db.js';
 
-// Carta autorizada. Importes en céntimos. Cualquier id no presente aquí
-// se rechaza. Esto evita que un usuario manipule el precio en el DOM.
-// Las claves se derivan del nombre con: lowercase + NFD + strip diacríticos
-// + strip caracteres no alfanuméricos. Coinciden 1:1 con el slug que
-// genera el cliente en index.html. Cualquier desajuste = pedido rechazado.
-const MENU = {
-  pokesakura:          { name: 'Poké Sakura',             price: 1350 },
-  bowlmediterraneo:    { name: 'Bowl Mediterráneo',       price: 1190 },
-  bowlgarden:          { name: 'Bowl Garden',             price: 1090 },
-  poketropical:        { name: 'Poké Tropical',           price: 1290 },
-  wrapcaesar:          { name: 'Wrap Caesar',             price:  950 },
-  pitahalloumi:        { name: 'Pita Halloumi',           price: 1050 },
-  wrapmediterraneo:    { name: 'Wrap Mediterráneo',       price:  990 },
-  wrapsalmon:          { name: 'Wrap Salmón',             price: 1150 },
-  avocadotoast:        { name: 'Avocado Toast',           price:  890 },
-  ricottafrutosrojos:  { name: 'Ricotta & Frutos rojos',  price:  850 },
-  quesadillaverde:     { name: 'Quesadilla Verde',        price:  990 },
-  smokedsalmontoast:   { name: 'Smoked Salmon Toast',     price: 1150 },
-  berrybowl:           { name: 'Berry Bowl',              price:  850 },
-  acaiclassic:         { name: 'Açaí Classic',            price:  950 },
-  frozenyogurtnutella: { name: 'Frozen Yogurt & Nutella', price:  890 },
-  acaitropical:        { name: 'Açaí Tropical',           price:  990 },
-};
+// El menú es la tabla `products` de SQLite. Es la fuente única de verdad
+// para precios y disponibilidad — el back-office la edita, este endpoint
+// la lee. Nunca se confía en el precio que envía el navegador.
+function lookupProduct(id) {
+  return db.prepare('SELECT id, name, price_cents FROM products WHERE id = ? AND is_active = 1').get(id);
+}
 
 const MIN_ORDER         = 1500;  // 15,00 €
 const DELIVERY_FEE      =  250;  //  2,50 €
@@ -55,7 +39,7 @@ export default async function createCheckoutSession(req, res) {
     }
 
     const lineItems = items.map(it => {
-      const dish = MENU[it.id];
+      const dish = lookupProduct(it.id);
       if (!dish) throw new Error(`Plato no disponible: ${it.id}`);
       const qty = parseInt(it.qty, 10);
       if (!Number.isFinite(qty) || qty < 1 || qty > 20) {
@@ -65,7 +49,7 @@ export default async function createCheckoutSession(req, res) {
         quantity: qty,
         price_data: {
           currency: 'eur',
-          unit_amount: dish.price,
+          unit_amount: dish.price_cents,
           product_data: { name: dish.name },
         },
       };

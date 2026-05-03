@@ -6,3 +6,8 @@ node_modules/
 .netlify
 .DS_Store
 *.log
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
