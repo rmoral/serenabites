@@ -6,7 +6,7 @@
  *   POST /api/stripe-webhook           → Confirmación de pago
  *   /api/admin/*                       → Back-office (auth + CRUD)
  *
- * Apache hace ProxyPass /api/ → http://127.0.0.1:3000/api/
+ * Apache hace ProxyPass /api/ → http://127.0.0.1:3010/api/
  * (ver deploy/serenabites.conf)
  *
  * Las variables de entorno se cargan desde:
@@ -37,7 +37,7 @@ try {
 // Init DB y migraciones (sembramos admin si no existe)
 initDB();
 
-const PORT = parseInt(process.env.PORT || '3000', 10);
+const PORT = parseInt(process.env.PORT || '3010', 10);
 const HOST = process.env.HOST || '127.0.0.1';
 
 const app = express();

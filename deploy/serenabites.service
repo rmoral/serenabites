@@ -38,7 +38,7 @@ Group=ubuntu
 WorkingDirectory=/var/www/html/serenabites
 EnvironmentFile=/var/www/html/serenabites/.env
 Environment=NODE_ENV=production
-Environment=PORT=3000
+Environment=PORT=3010
 Environment=HOST=127.0.0.1
 ExecStart=/usr/bin/node /var/www/html/serenabites/server.js
 Restart=on-failure
