@@ -1,5 +1,13 @@
 # Unit systemd para el backend de Serena Bites.
 # ───────────────────────────────────────────────────────────────
+# Convención del servidor:
+#   - Código físico:    /home/ubuntu/web/serenabites
+#   - Symlink público:  /var/www/html/serenabites → /home/ubuntu/web/serenabites
+#
+# Este unit usa el symlink como referencia. La única excepción es
+# ReadWritePaths= (sysmd no resuelve symlinks ahí, así que tiene
+# que ver el path físico para permitir la escritura de la DB).
+# ───────────────────────────────────────────────────────────────
 # Instalación:
 #   sudo cp deploy/serenabites.service /etc/systemd/system/serenabites.service
 #   sudo systemctl daemon-reload
@@ -23,12 +31,12 @@ Wants=network-online.target
 Type=simple
 User=www-data
 Group=www-data
-WorkingDirectory=/var/www/serenabites
-EnvironmentFile=/var/www/serenabites/.env
+WorkingDirectory=/var/www/html/serenabites
+EnvironmentFile=/var/www/html/serenabites/.env
 Environment=NODE_ENV=production
 Environment=PORT=3000
 Environment=HOST=127.0.0.1
-ExecStart=/usr/bin/node /var/www/serenabites/server.js
+ExecStart=/usr/bin/node /var/www/html/serenabites/server.js
 Restart=on-failure
 RestartSec=3
 StandardOutput=journal
@@ -38,8 +46,13 @@ StandardError=journal
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
-ProtectHome=true
-ReadWritePaths=/var/www/serenabites
+# ProtectHome se queda desactivado porque el código vive físicamente en
+# /home/ubuntu/web/serenabites (servido vía symlink en /var/www/html).
+ProtectHome=false
+# Whitelisteamos los dos paths (symlink y real) porque ProtectSystem opera
+# a nivel de namespace y no resuelve symlinks. La DB SQLite se escribe en
+# data/serenabites.db, dentro de uno de estos paths.
+ReadWritePaths=/var/www/html/serenabites /home/ubuntu/web/serenabites
 LockPersonality=true
 RestrictRealtime=true
 RestrictSUIDSGID=true

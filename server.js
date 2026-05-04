@@ -10,7 +10,7 @@
  * (ver deploy/serenabites.conf)
  *
  * Las variables de entorno se cargan desde:
- *   - systemd EnvironmentFile=/var/www/serenabites/.env (producción)
+ *   - systemd EnvironmentFile=/var/www/html/serenabites/.env (producción)
  *   - .env en local (vía dotenv) si existe
  */
 
