@@ -29,8 +29,12 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+# Corremos como `ubuntu` porque el código vive en /home/ubuntu/web/...
+# y www-data no puede atravesar /home/ubuntu (típicamente 750). Apache
+# sigue sirviendo los estáticos como www-data; este service solo gestiona
+# el backend Node y la DB SQLite.
+User=ubuntu
+Group=ubuntu
 WorkingDirectory=/var/www/html/serenabites
 EnvironmentFile=/var/www/html/serenabites/.env
 Environment=NODE_ENV=production
